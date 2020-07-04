@@ -26,4 +26,22 @@ jobs:
         pip install -r backend/requirements/dev.txt
 
     - name: Run flake8
-      run: flake8 --config backend/.flake8 backend
+      run: flake8 --config backend/.flake8 backend/
+
+  type-checking:
+        runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        pip install -r backend/requirements/dev.txt
+
+    - name: Run mypy
+      run: mypy --config-file backend/mypy.ini backend/
