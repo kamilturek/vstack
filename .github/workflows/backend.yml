@@ -22,4 +22,4 @@ jobs:
     - name: Install dependencies
       run: |
         pip install --upgrade pip
-        pip install -r backends/requirements/dev.txt
+        pip install -r backend/requirements/dev.txt
