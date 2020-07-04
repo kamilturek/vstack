@@ -41,4 +41,4 @@ jobs:
         npm --prefix frontend/ install frontend/
 
     - name: Run ng lint
-      run: cd frontend/ && ng lint
+      run: cd frontend/ && npm lint
