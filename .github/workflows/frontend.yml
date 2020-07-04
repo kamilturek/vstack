@@ -38,7 +38,7 @@ jobs:
 
     - name: Run npm install
       run: |
-        npm --prefix frontend/ install --only=dev frontend/
+        npm --prefix frontend/ install frontend/
 
     - name: Run ng lint
-      run: cd frontend/ && ng build
+      run: cd frontend/ && npm run lint
