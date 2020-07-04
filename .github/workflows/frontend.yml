@@ -1,0 +1,24 @@
+name: frontend
+
+on:
+  push:
+    # Temporarily, on dev purposes
+    branches: [ master]
+    # paths:
+    # - 'frontend/**'
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2.1.0
+
+    - name: Run npm install
+      run: |
+        npm install frontend/
