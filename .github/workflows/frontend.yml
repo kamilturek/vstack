@@ -21,7 +21,7 @@ jobs:
 
     - name: Run npm install
       run: |
-        npm --prefix frontned/ install frontend/
+        npm --prefix frontend/ install frontend/
 
     # - name: Run npm build
       # run: |
