@@ -2,10 +2,8 @@ name: frontend
 
 on:
   push:
-    # Temporarily, on dev purposes
-    branches: [ master]
-    # paths:
-    # - 'frontend/**'
+    paths:
+    - 'frontend/**'
   pull_request:
     branches: [ master ]
 
