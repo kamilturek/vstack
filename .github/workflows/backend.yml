@@ -10,7 +10,7 @@ on:
     branches: [ master ]
 
 jobs:
-  linting:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +28,7 @@ jobs:
     - name: Run flake8
       run: flake8 --config backend/.flake8 backend/
 
-  type-checking:
+  type-check:
     runs-on: ubuntu-latest
 
     steps:
