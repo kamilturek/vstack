@@ -17,7 +17,7 @@ export class AuthService {
     get isLoggedIn(): boolean {
         return !!this.token;
     }
-    
+
     login(credentials: { username: string, password: string }): void {
         this.http.post(`http://localhost:8000/api/auth/`, credentials).subscribe(
             (response: { token: string }) => {
@@ -26,7 +26,7 @@ export class AuthService {
                 this.router.navigateByUrl('/');
             },
             (error: HttpErrorResponse) => {
-                if (error.status == 400) {
+                if (error.status === 400) {
                     this.snackBar.open('Unable to login with provided credentials.', 'Hide', { duration: 3000 });
                 } else {
                     this.snackBar.open('Something went wrong.', 'Hide', { duration: 3000 });

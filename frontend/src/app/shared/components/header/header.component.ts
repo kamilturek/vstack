@@ -15,7 +15,7 @@ export class HeaderComponent {
     logout(): void {
         this.authService.logout();
     }
-    
+
     toggle(): void {
         this.toggleSideBar.emit();
     }
