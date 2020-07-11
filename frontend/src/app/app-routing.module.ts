@@ -4,7 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { DefaultComponent } from './layouts/default/default.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { InstancesComponent } from './modules/instances/instances.component';
-import { LoginComponent } from './modules/login/login.component';
+import { LoginComponent } from './modules/auth/components/login/login.component';
+import { AuthGuard } from './modules/auth/auth.guard';
 
 
 const routes: Routes = [
@@ -13,8 +14,9 @@ const routes: Routes = [
         component: LoginComponent
     },
     {
-        path: '',
+        path: 'dashboard',
         component: DefaultComponent,
+        canActivate: [AuthGuard],
         children: [
             {
                 path: '',
@@ -25,6 +27,15 @@ const routes: Routes = [
                 component: InstancesComponent
             }
         ]
+    },
+    {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+    },
+    {
+        path: '**',
+        redirectTo: 'dashboard'
     }
 ];
 

@@ -7,14 +7,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { DefaultComponent } from './default.component';
 import { DashboardComponent } from '../../modules/dashboard/dashboard.component';
 import { InstancesComponent } from '../../modules/instances/instances.component';
-import { LoginComponent } from '../../modules/login/login.component';
 
 import { SharedModule } from '../../shared/shared.module';
+import { AuthModule } from '../../modules/auth/auth.module';
 
 
 @NgModule({
@@ -22,9 +23,9 @@ import { SharedModule } from '../../shared/shared.module';
         DefaultComponent,
         DashboardComponent,
         InstancesComponent,
-        LoginComponent,
     ],
     imports: [
+        AuthModule,
         CommonModule,
         FlexLayoutModule,
         MatButtonModule,
@@ -33,6 +34,7 @@ import { SharedModule } from '../../shared/shared.module';
         MatInputModule,
         MatSidenavModule,
         MatToolbarModule,
+        ReactiveFormsModule,
         RouterModule,
         SharedModule,
     ]
