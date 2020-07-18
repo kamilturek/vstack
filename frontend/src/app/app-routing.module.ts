@@ -6,12 +6,17 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { InstancesComponent } from './modules/instances/instances.component';
 import { LoginComponent } from './modules/auth/components/login/login.component';
 import { AuthGuard } from './modules/auth/auth.guard';
+import { RegisterComponent } from './modules/auth/components/register/register.component';
 
 
 const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'register',
+        component: RegisterComponent
     },
     {
         path: 'dashboard',

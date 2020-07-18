@@ -11,11 +11,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
     declarations: [
         LoginComponent,
+        RegisterComponent,
     ],
     imports: [
         CommonModule,
