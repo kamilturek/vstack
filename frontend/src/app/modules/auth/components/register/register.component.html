@@ -4,7 +4,7 @@
             <mat-toolbar color="primary">
                 Register page
             </mat-toolbar>
-            <form [formGroup]="registerForm" fxLayout="column" fxLayoutAlign="stretch">
+            <form [formGroup]="registerForm" fxLayout="column" fxLayoutAlign="stretch" (ngSubmit)="onSubmit()">
                 <mat-form-field>
                     <input formControlName="username" matInput placeholder="Username" type="text">
                 </mat-form-field>
