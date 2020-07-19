@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'django_extensions',
     'rest_framework',
     'rest_framework.authtoken',
 ]
@@ -121,3 +122,5 @@ MEDIA_URL = 'media/'
 STATIC_URL = '/static/'
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+SHELL_PLUS = 'ipython'
