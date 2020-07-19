@@ -27,6 +27,12 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 ]
 
+VSTACK_APPS = [
+    'users'
+]
+
+INSTALLED_APPS += VSTACK_APPS
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
