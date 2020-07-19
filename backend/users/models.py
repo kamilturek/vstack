@@ -5,8 +5,13 @@ from django.db import models
 class UserProfile(models.Model):
     user = models.OneToOneField(
         User,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='profile'
     )
     avatar = models.ImageField(
-        upload_to='avatars'
+        upload_to='avatars',
+        default='no_avatar'
     )
+
+    def __str__(self) -> str:
+        return str(self.user)
