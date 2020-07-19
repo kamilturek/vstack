@@ -15,5 +15,5 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     @action(detail=False, methods=['get'])
-    def this(self, request: Request) -> Response:
+    def current(self, request: Request) -> Response:
         return Response(self.get_serializer(request.user).data)
