@@ -10,7 +10,7 @@ class UserProfile(models.Model):
     )
     avatar = models.ImageField(
         upload_to='avatars',
-        default='no_avatar'
+        default='avatars/no_avatar.png'
     )
 
     def __str__(self) -> str:
