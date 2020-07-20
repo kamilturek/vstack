@@ -41,7 +41,7 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     private catchUnauthenticated(): void {
-        this.router.navigateByUrl('/login');
+        this.authService.logout();
         this.snackBar.open('Please login.', 'Hide', { duration: 3000 });
     }
 }
