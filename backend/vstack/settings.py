@@ -6,8 +6,10 @@ import environ
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-env = environ.Env()
-environ.Env.read_env(os.path.join(BASE_DIR, '..', 'vstack.env'))
+env_path = os.path.join(BASE_DIR, '..', 'vstack.env')
+if os.path.exists(env_path):
+    env = environ.Env()
+    environ.Env.read_env(env_path)
 
 SECRET_KEY = env('SECRET_KEY')
 
