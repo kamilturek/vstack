@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework.test import APITestCase
 
 
-class LoginAPITestCase(APITestCase):
+class LoginUserAPITestCase(APITestCase):
     URL = '/api/auth/'
 
     def test_login_existing_user(self):
