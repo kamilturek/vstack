@@ -48,6 +48,17 @@ jobs:
   unit-tests:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:10
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: vstack
+        ports:
+          - 5432:5432
+
     steps:
     - uses: actions/checkout@v2
 
@@ -63,10 +74,6 @@ jobs:
       run: python backend/manage.py migrate
 
     - name: Run unit tests
-      env:
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
       run: |
         cd backend/
         python manage.py test
