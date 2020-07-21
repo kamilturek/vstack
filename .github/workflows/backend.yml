@@ -59,6 +59,9 @@ jobs:
     - name: Install requirements
       run: pip install -r backend/requirements/dev.txt
 
+    - name: Run migrations
+      run: python backend/manage.py migrate
+
     - name: Run unit tests
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
