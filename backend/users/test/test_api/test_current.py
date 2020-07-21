@@ -14,6 +14,7 @@ class CurrentUserAPITestCase(APITestCase):
         self.client.force_authenticate(user=user)
         response = self.client.get(self.URL)
         expected_response = {
+            'id': user.id,
             'username': 'user',
             'avatar': 'media/avatars/no_avatar.png',
         }
