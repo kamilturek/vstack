@@ -2,10 +2,8 @@ name: backend
 
 on:
   push:
-    # Temporarily, on dev purposes
-    branches: [ master ]
-    # paths:
-    # - 'backend/**'
+    paths:
+    - 'backend/**'
   pull_request:
     branches: [ master ]
 
