@@ -11,11 +11,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
+import { ThemeMenuComponent } from './components/theme-menu/theme-menu.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -24,6 +27,7 @@ import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
         HeaderComponent,
         SidebarComponent,
         SpinnerComponent,
+        ThemeMenuComponent,
     ],
     imports: [
         CommonModule,
@@ -35,7 +39,9 @@ import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
         MatListModule,
         MatMenuModule,
         MatProgressSpinnerModule,
+        MatRadioModule,
         MatToolbarModule,
+        ReactiveFormsModule,
         RouterModule,
     ],
     exports: [
