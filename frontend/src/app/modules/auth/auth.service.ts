@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Credentials } from 'src/app/shared/interfaces/credentials';
+import { catchError, tap } from 'rxjs/operators';
+import { empty, Observable } from 'rxjs';
+import { SnackBarService } from '@shared/services/snack-bar.service';
 
 @Injectable({
     providedIn: 'root'
@@ -11,27 +14,28 @@ export class AuthService {
     constructor(
         private router: Router,
         private http: HttpClient,
-        private snackBar: MatSnackBar,
+        private snackBarService: SnackBarService
     ) { }
 
     get isLoggedIn(): boolean {
         return !!this.token;
     }
 
-    login(credentials: { username: string, password: string }): void {
-        this.http.post(`http://localhost:8000/api/auth/`, credentials).subscribe(
-            (response: { token: string }) => {
-                this.token = response.token;
-                this.snackBar.open('Logged in successfully.', 'Hide', { duration: 3000 });
-                this.router.navigateByUrl('/');
-            },
-            (error: HttpErrorResponse) => {
+    login(credentials: Credentials): Observable<{ token: string }> {
+        return this.http.post(`http://localhost:8000/api/auth/`, credentials).pipe(
+            catchError((error: HttpErrorResponse) => {
                 if (error.status === 400) {
-                    this.snackBar.open('Unable to login with provided credentials.', 'Hide', { duration: 3000 });
+                    this.snackBarService.open('Unable to login with provided credentials.');
                 } else {
-                    this.snackBar.open('Something went wrong.', 'Hide', { duration: 3000 });
+                    this.snackBarService.open('Something went wrong.');
                 }
-            });
+                return empty();
+            }),
+            tap((response: { token: string} ) => {
+                this.token = response.token;
+                this.router.navigateByUrl('/');
+            })
+        );
     }
 
     logout(): void {

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../../auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarService } from '@shared/services/snack-bar.service';
 
 @Component({
     selector: 'app-login',
@@ -17,14 +17,16 @@ export class LoginComponent {
 
     constructor(
         private authService: AuthService,
-        private snackBar: MatSnackBar
+        private snackBarService: SnackBarService
     ) { }
 
     onSubmit(): void {
         if (this.loginForm.valid) {
-            this.authService.login(this.loginForm.value);
+            this.authService.login(this.loginForm.value).subscribe(
+                () => this.snackBarService.open('Logged in successfully.')
+            );
         } else {
-            this.snackBar.open('Please provide all required credentials.', 'Hide');
+            this.snackBarService.open('Please provide all required credentials.');
         }
     }
 }

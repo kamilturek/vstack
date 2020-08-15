@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { baseUrl } from '../../../environments/environment';
+import { baseUrl } from '@environment/environment';
 import { Observable } from 'rxjs';
 import { User } from '../interfaces/user';
+import { Credentials } from '../interfaces/credentials';
 
 @Injectable({
     providedIn: 'root'
@@ -13,5 +14,9 @@ export class UserService {
 
     getCurrentUser(): Observable<User> {
         return this.http.get<User>(`${baseUrl}/api/users/current/`);
+    }
+
+    register(credentials: Credentials): Observable<Credentials> {
+        return this.http.post<Credentials>(`${baseUrl}/api/users/`, credentials);
     }
 }
