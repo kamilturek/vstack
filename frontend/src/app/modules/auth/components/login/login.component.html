@@ -1,22 +1,24 @@
-<div fxFlexFill fxLayoutAlign="center center" class="login-div">
-    <div fxFlex="25">
-        <mat-card>
-            <mat-toolbar color="primary">
-                Login Page
-            </mat-toolbar>
-            <form [formGroup]="loginForm" fxLayout="column" fxLayoutAlign="stretch" class="login-form"
-                (ngSubmit)="onSubmit()">
-                <mat-form-field>
-                    <input formControlName="username" matInput placeholder="Username" type="text">
-                </mat-form-field>
-                <mat-form-field>
-                    <input formControlName="password" matInput placeholder="Password" type="password">
-                </mat-form-field>
-                <button mat-raised-button type="submit">Login</button>
-            </form>
-        </mat-card>
-        <div class="register-link">
-            <a routerLink="/register">Don't have an account? Register</a>
+<mat-card fxFlexFill>
+    <div fxFlexFill fxLayoutAlign="center center" class="login-div">
+        <div fxFlex="25">
+            <mat-card>
+                <mat-toolbar color="primary">
+                    Login Page
+                </mat-toolbar>
+                <form [formGroup]="loginForm" fxLayout="column" fxLayoutAlign="stretch" class="login-form"
+                    (ngSubmit)="onSubmit()">
+                    <mat-form-field>
+                        <input formControlName="username" matInput placeholder="Username" type="text">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input formControlName="password" matInput placeholder="Password" type="password">
+                    </mat-form-field>
+                    <button mat-raised-button type="submit">Login</button>
+                </form>
+            </mat-card>
+            <div class="register-link">
+                <a mat-button color="primary" routerLink="/register">Don't have an account? Register</a>
+            </div>
         </div>
     </div>
-</div>
+</mat-card>

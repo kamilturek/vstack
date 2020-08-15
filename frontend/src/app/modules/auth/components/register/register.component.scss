@@ -1,5 +1,3 @@
-@import 'src/app/variables';
-
 mat-card {
     padding: 0;
 }
@@ -13,8 +11,6 @@ form {
     text-align: center;
 
     a {
-        text-decoration: none;
-        color: $accent;
         font-weight: lighter;
     }
 }
