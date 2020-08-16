@@ -19,4 +19,17 @@ export class UserService {
     register(credentials: Credentials): Observable<Credentials> {
         return this.http.post<Credentials>(`${baseUrl}/api/users/`, credentials);
     }
+
+    setPassword(userId: number,
+                data: {
+                    currentPassword: string,
+                    password: string,
+                    passwordConfirmation: string,
+    }): Observable<string> {
+        return this.http.post<string>(`${baseUrl}/api/users/${userId}/set_password/`, {
+            current_password: data.currentPassword,
+            password: data.password,
+            password_confirmation: data.passwordConfirmation
+        });
+    }
 }
