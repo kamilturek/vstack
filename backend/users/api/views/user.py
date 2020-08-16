@@ -8,7 +8,7 @@ from rest_framework.response import Response
 
 from django.contrib.auth.models import User
 
-from users.api.serializers import UserSerializer
+from users.api.serializers import PasswordSerializer, UserSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -20,3 +20,12 @@ class UserViewSet(viewsets.ModelViewSet):
         if request.user.is_authenticated:
             return Response(self.get_serializer(request.user).data)
         raise NotAuthenticated
+
+    @action(detail=True, methods=['post'])
+    def set_password(self, request: Request, pk: int) -> Union[NoReturn, Response]:
+        user = self.get_object()
+        serializer = PasswordSerializer(data=request.data, context={'user': user})
+        if serializer.is_valid(raise_exception=True):
+            user.set_password(serializer.data['password'])
+            user.save()
+            return Response('Password has been set.')
