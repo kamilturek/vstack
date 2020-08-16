@@ -7,8 +7,8 @@ import { Injectable } from '@angular/core';
 export class SnackBarService extends MatSnackBar {
 
     open(message: string,
-        action: string = 'Hide',
-        config: MatSnackBarConfig<any> = {duration: 3000 }
+         action: string = 'Hide',
+         config: MatSnackBarConfig<any> = {duration: 3000 }
     ): MatSnackBarRef<SimpleSnackBar> {
         return super.open(message, action, config);
     }

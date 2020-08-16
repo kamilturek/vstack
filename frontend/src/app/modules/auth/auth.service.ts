@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Credentials } from 'src/app/shared/interfaces/credentials';
 import { catchError, tap } from 'rxjs/operators';
-import { empty, Observable } from 'rxjs';
+import { Observable, EMPTY } from 'rxjs';
 import { SnackBarService } from '@shared/services/snack-bar.service';
 
 @Injectable({
@@ -29,7 +29,7 @@ export class AuthService {
                 } else {
                     this.snackBarService.open('Something went wrong.');
                 }
-                return empty();
+                return EMPTY;
             }),
             tap((response: { token: string} ) => {
                 this.token = response.token;

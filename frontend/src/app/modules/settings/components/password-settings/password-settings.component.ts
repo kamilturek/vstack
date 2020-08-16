@@ -49,7 +49,7 @@ export class PasswordSettingsComponent {
                     this.snackBarService.open('Something went wrong.');
                 }
             }
-        )
+        );
     }
 }
 
