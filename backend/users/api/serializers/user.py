@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class UserSerializer(serializers.ModelSerializer):
 
     password = serializers.CharField(write_only=True)
-    avatar = serializers.CharField(source='profile.avatar.url', required=False)
+    avatar = serializers.CharField(source='profile.avatar.url', read_only=True)
 
     class Meta:
         model = User
@@ -19,15 +19,9 @@ class UserSerializer(serializers.ModelSerializer):
 
     def update(self, instance: User, validated_data: Dict) -> User:
         self.update_password(instance, validated_data)
-        self.update_avatar(instance, validated_data)
         return super().update(instance, validated_data)
 
     def update_password(self, instance: User, validated_data: Dict) -> None:
         if 'password' in validated_data:
             password = validated_data.pop('password')
             instance.set_password(password)
-
-    def update_avatar(self, instance: User, validated_data: Dict) -> None:
-        if 'avatar' in validated_data:
-            avatar = validated_data.pop('avatar')
-            instance.profile.avatar = avatar
