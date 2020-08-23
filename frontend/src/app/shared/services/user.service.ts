@@ -32,4 +32,10 @@ export class UserService {
             password_confirmation: data.passwordConfirmation
         });
     }
+
+    setAvatar(userId: number, image: any): Observable<string> {
+        const formData = new FormData();
+        formData.append('avatar', image);
+        return this.http.post<string>(`${baseUrl}/api/users/${userId}/set_avatar/`, formData);
+    }
 }

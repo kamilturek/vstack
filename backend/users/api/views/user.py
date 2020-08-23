@@ -32,9 +32,8 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['post'])
     def set_avatar(self, request: Request, pk: int):
-        serializer = AvatarSerializer(data=request.data)
+        user = self.get_object()
+        serializer = AvatarSerializer(data=request.data, context={'user': user})
         if serializer.is_valid(raise_exception=True):
-            user = self.get_object()
-            user.profile.avatar = request.data['avatar']
-            user.profile.save()
+            serializer.save()
             return Response('Avatar has been set.')
