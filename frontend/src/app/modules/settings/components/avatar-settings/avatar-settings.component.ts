@@ -41,7 +41,7 @@ export class AvatarSettingsComponent implements OnInit {
 
     openCropper(event: any): void {
         const dialogRef = this.dialog.open(AvatarCropperComponent, {
-            data: { imageChangedEvent: event } 
+            data: { imageChangedEvent: event }
         });
         dialogRef.afterClosed().subscribe((result: any) => {
             this.resetFile();

@@ -21,7 +21,7 @@ export class AvatarCropperComponent {
         this.imageChangedEvent = data.imageChangedEvent;
     }
 
-    imageCropped(event: ImageCroppedEvent) {
+    imageCropped(event: ImageCroppedEvent): void {
         this.croppedImage = event.base64;
     }
 
