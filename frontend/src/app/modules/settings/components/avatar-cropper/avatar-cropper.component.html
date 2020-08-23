@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Crop your avatar</h2>
+<mat-dialog-content>
+    <image-cropper
+        style="max-width: 200px; max-height: 200px;"
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="1"
+        resizeToWidth="100"
+        resizeToHeight="100"
+        format="png"
+        (imageCropped)="imageCropped($event)"
+        (loadImageFailed)="loadImageFailed()"
+    ></image-cropper>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button fxFlexFill mat-raised-button [mat-dialog-close]="croppedImage" color="primary">Crop</button>
+</mat-dialog-actions>

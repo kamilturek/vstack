@@ -1,0 +1,10 @@
+<div fxLayout="row" fxFlex="30" fxFlexOffset="35">
+    <div class="avatar">
+        <img [src]="user?.avatarUrl">
+    </div>
+    <div fxFill fxLayoutAlign="center center">
+        <button mat-raised-button color="primary" (click)="onClick()">Change Avatar</button>
+    </div>
+</div>
+
+<input type="file" #imageInput class="image-input" (change)="fileChangeEvent($event)">
