@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 import argparse
 import os
-import operator
 import datetime
+from typing import NoReturn, Optional
 
 import docker
-from azure.storage.blob import BlobClient, ContainerClient
+from docker.models.containers import Container
+from azure.storage.blob import BlobClient
 
 
 CONTAINER = 'vstack_db_1'
@@ -14,26 +15,26 @@ POSTGRES_DB = os.environ.get('POSTGRES_DB')
 STORAGE_CONN_STR = os.environ.get('STORAGE_CONN_STR')
 
 
-def verify_args(args):
+def verify_args(args: argparse.Namespace) -> Optional[NoReturn]:
     required = ['container', 'user', 'dbname', 'conn_str']
     for arg in required:
         if getattr(args, arg) is None:
             raise KeyError(f'\'{arg}\' argument was not provided and environment variable was not set.')
 
 
-def get_container(container_name):
+def get_container(container_name: str) -> Container:
     client = docker.from_env()
     return client.containers.get(container_name)
 
 
-def get_filepath():
+def get_filepath() -> str:
     suffix = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-    filename =f'vstack_db_{suffix}.tar'
+    filename = f'vstack_db_{suffix}.tar'
     filepath = f'/tmp/{filename}'
     return filepath
 
 
-def dump(container, user, dbname, filepath):
+def dump(container: Container, user: str, dbname: str, filepath: str) -> Optional[NoReturn]:
     exit_code, output = container.exec_run(f'/bin/bash -c "pg_dump -U {user} -F t {dbname} > {filepath}"')
     if exit_code == 0:
         bits, stat = container.get_archive(filepath)
@@ -45,14 +46,16 @@ def dump(container, user, dbname, filepath):
         raise Exception(output)
 
 
-def upload(conn_str, filepath):
-    blob = BlobClient.from_connection_string(conn_str=conn_str, container_name='backup', blob_name=os.path.basename(filepath))
+def upload(conn_str: str, filepath: str) -> None:
+    blob = BlobClient.from_connection_string(conn_str=conn_str,
+                                             container_name='backup',
+                                             blob_name=os.path.basename(filepath))
     with open(filepath, 'rb') as f:
         blob.upload_blob(f)
     print(f'Uploaded {os.path.basename(filepath)}.')
 
 
-def dump_and_upload(args):
+def dump_and_upload(args: argparse.Namespace) -> None:
     container = get_container(args.container)
     filepath = get_filepath()
     dump(container, args.user, args.dbname, filepath)
