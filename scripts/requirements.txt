@@ -1,0 +1,2 @@
+azure-storage-blob==12.4.0
+docker==4.3.1
