@@ -24,7 +24,7 @@ jobs:
         pip install flake8
 
     - name: Run flake8
-      run: flake8 --config backend/.flake8 backend/
+      run: flake8 backend/
 
   type-check:
     runs-on: ubuntu-latest
@@ -41,7 +41,7 @@ jobs:
       run: pip install mypy
 
     - name: Run mypy
-      run: mypy --config-file backend/mypy.ini backend/
+      run: mypy backend/
 
   unit-tests:
     runs-on: ubuntu-latest
