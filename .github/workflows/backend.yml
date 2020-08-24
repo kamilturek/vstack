@@ -5,7 +5,8 @@ on:
     paths:
     - 'backend/**'
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
 
 jobs:
   lint:
