@@ -47,12 +47,11 @@ def dump(container: Container, user: str, dbname: str, filepath: str) -> Optiona
 
 
 def upload(conn_str: str, filepath: str) -> None:
-    blob = BlobClient.from_connection_string(conn_str=conn_str,
-                                             container_name='backup',
-                                             blob_name=os.path.basename(filepath))
+    filename = os.path.basename(filepath)
+    blob = BlobClient.from_connection_string(conn_str=conn_str, container_name='backup', blob_name=filename)
     with open(filepath, 'rb') as f:
         blob.upload_blob(f)
-    print(f'Uploaded {os.path.basename(filepath)}.')
+    print(f'Uploaded {filename}.')
 
 
 def dump_and_upload(args: argparse.Namespace) -> None:
