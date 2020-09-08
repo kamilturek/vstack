@@ -20,16 +20,20 @@ class Instance(models.Model):
     def __str__(self) -> str:
         return f'{self.container_id} {self.image}'
 
-    def create_container(self) -> Container:
-        if self.container_id is None:
-            client = docker.from_env()
-            container = client.containers.run(
-                image=str(self.image),
-                command='bash',
-                name=self.name,
-                detach=True,
-                tty=True,
-            )
-            self.container_id = container.short_id
-            return container
-        raise Exception('Container already exists.')
+    def run(self) -> Container:
+        client = docker.from_env()
+        container = client.containers.run(
+            image=str(self.image),
+            command='bash',
+            name=self.name,
+            detach=True,
+            tty=True,
+        )
+        self.container_id = container.short_id
+        self.save()
+        return container
+
+    def remove(self, force: bool = False) -> None:
+        client = docker.from_env()
+        container = client.containers.get(self.container_id)
+        container.remove(force=force)
