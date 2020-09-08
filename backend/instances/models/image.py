@@ -7,4 +7,4 @@ class Image(models.Model):
     image_url = models.URLField()
 
     def __str__(self) -> str:
-        return f'{self.name}:{self.tag}'
+        return f'{self.name}:{self.tag}'.lower()
