@@ -1,10 +1,10 @@
 from rest_framework import routers
 
-from users.api.views import UserViewSet
+from instances.api.views import ImageViewSet
 
 
 router = routers.SimpleRouter()
-router.register(r'', UserViewSet)
+router.register(r'images', ImageViewSet)
 
 urlpatterns = []
 urlpatterns += router.urls

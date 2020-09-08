@@ -29,7 +29,8 @@ INSTALLED_APPS = [
 ]
 
 VSTACK_APPS = [
-    'users'
+    'instances',
+    'users',
 ]
 
 INSTALLED_APPS += VSTACK_APPS
