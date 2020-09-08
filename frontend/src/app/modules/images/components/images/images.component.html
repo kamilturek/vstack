@@ -1,9 +1,4 @@
-<div fxFlex fxLayout="row wrap">
-    <mat-card fxFlex="nogrow" fxLayout="column" fxLayoutAlign="center center" *ngFor="let image of images$ | async">
-        <div>
-            <p>{{ image.name }}</p>
-            <small>{{ image.tag }}</small>
-        </div>
-        <img [src]="image.imageUrl">
-    </mat-card>
-</div>
+<mat-form-field>
+    <input [(ngModel)]="imageName" (ngModelChange)="onSearchValueChanged($event)" matInput type="text" placeholder="Search image" name="image">
+</mat-form-field>
+<app-images-list [images]="filteredImages"></app-images-list>
