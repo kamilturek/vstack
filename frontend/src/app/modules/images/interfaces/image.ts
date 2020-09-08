@@ -1,5 +1,5 @@
 export interface Image {
     name: string;
     tag: string;
-    imageUrl: string;
+    image_url: string;
 }
