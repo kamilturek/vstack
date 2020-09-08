@@ -22,7 +22,10 @@
         ],
         "@shared/*": [
             "src/app/shared/*"
-        ]
+        ],
+        "@app/*": [
+            "src/app/*"
+        ],
     }
   }
 }
