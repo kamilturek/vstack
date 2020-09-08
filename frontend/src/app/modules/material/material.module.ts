@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 
 const modules = [
@@ -17,6 +18,7 @@ const modules = [
     MatCardModule,
     MatDialogModule,
     MatDividerModule,
+    MatIconModule,
     MatInputModule,
 ];
 

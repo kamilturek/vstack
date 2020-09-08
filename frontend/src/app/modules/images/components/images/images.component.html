@@ -1,4 +1,7 @@
 <mat-form-field>
     <input [(ngModel)]="imageName" (ngModelChange)="onSearchValueChanged($event)" matInput type="text" placeholder="Search image" name="image">
+    <button mat-button *ngIf="imageName" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearchValue()">
+        <mat-icon>close</mat-icon>
+    </button>
 </mat-form-field>
 <app-images-list [images]="filteredImages"></app-images-list>

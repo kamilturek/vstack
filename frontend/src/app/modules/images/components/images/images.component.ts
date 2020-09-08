@@ -26,4 +26,9 @@ export class ImagesComponent implements OnInit {
             (image: Image) => image.name.toLowerCase().includes(name.toLowerCase())
         );
     }
+
+    clearSearchValue(): void {
+        this.imageName = '';
+        this.onSearchValueChanged(this.imageName);
+    }
 }
