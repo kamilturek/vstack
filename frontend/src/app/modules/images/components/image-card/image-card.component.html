@@ -1,0 +1,9 @@
+<mat-card fxFlex="nogrow" fxLayout="column" fxLayoutAlign="center center">
+    <div>
+        <p>{{ image.name }}</p>
+        <small>{{ image.tag }}</small>
+    </div>
+    <div class="image" fxLayoutAlign="center center">
+        <img [src]="image.image_url">
+    </div>
+</mat-card>

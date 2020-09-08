@@ -1,11 +1,5 @@
 <div fxFlex fxLayout="row wrap">
-    <mat-card fxFlex="nogrow" fxLayout="column" fxLayoutAlign="center center" *ngFor="let image of images">
-        <div>
-            <p>{{ image.name }}</p>
-            <small>{{ image.tag }}</small>
-        </div>
-        <div class="image" fxLayoutAlign="center center">
-            <img [src]="image.image_url">
-        </div>
-    </mat-card>
+    <ng-container *ngFor="let image of images">
+        <app-image-card [image]="image"></app-image-card>
+    </ng-container>
 </div>
