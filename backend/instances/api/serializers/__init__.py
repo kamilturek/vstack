@@ -1,2 +1,2 @@
 from .image import ImageSerializer
-from .instance import InstanceSerializer
+from .instance import InstanceSerializer, InstanceRetrieveSerializer
