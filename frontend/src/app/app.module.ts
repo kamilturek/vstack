@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DefaultModule } from './layouts/default/default.module';
 import { ImagesModule } from './modules/images/images.module';
+import { InstancesModule } from './modules/instances/instances.module';
 import { SharedModule } from './shared/shared.module';
 
 
@@ -19,6 +20,7 @@ import { SharedModule } from './shared/shared.module';
         BrowserAnimationsModule,
         DefaultModule,
         ImagesModule,
+        InstancesModule,
         SharedModule,
     ],
     providers: [],

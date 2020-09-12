@@ -12,6 +12,6 @@ export class ImageService {
     constructor(private http: HttpClient) { }
 
     getImages(): Observable<Image[]> {
-        return this.http.get<Image[]>(`${baseUrl}/api/instances/images/`);
+        return this.http.get<Image[]>(`${baseUrl}/api/images/`);
     }
 }

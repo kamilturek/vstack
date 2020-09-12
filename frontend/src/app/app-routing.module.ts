@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DefaultComponent } from './layouts/default/default.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
-import { InstancesComponent } from './modules/instances/instances.component';
+import { InstancesComponent } from './modules/instances/components/instances/instances.component';
 import { SettingsComponent } from './modules/settings/components/settings/settings.component';
 import { LoginComponent } from './modules/auth/components/login/login.component';
 import { AuthGuard } from './modules/auth/auth.guard';

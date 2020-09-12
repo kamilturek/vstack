@@ -12,7 +12,6 @@ import { RouterModule } from '@angular/router';
 
 import { DefaultComponent } from './default.component';
 import { DashboardComponent } from '../../modules/dashboard/dashboard.component';
-import { InstancesComponent } from '../../modules/instances/instances.component';
 
 import { SharedModule } from '../../shared/shared.module';
 import { SettingsModule } from '../../modules/settings/settings.module';
@@ -23,7 +22,6 @@ import { AuthModule } from '../../modules/auth/auth.module';
     declarations: [
         DefaultComponent,
         DashboardComponent,
-        InstancesComponent,
     ],
     imports: [
         AuthModule,

@@ -10,6 +10,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 
 const modules = [
@@ -20,6 +22,8 @@ const modules = [
     MatDividerModule,
     MatIconModule,
     MatInputModule,
+    MatSortModule,
+    MatTableModule,
 ];
 
 @NgModule({
