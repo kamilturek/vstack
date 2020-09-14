@@ -44,7 +44,7 @@ export class InstancesTableComponent implements OnInit, OnChanges {
       this.dataSource.data.forEach(row => this.instanceStore.selection.select(row));
   }
 
-  checkboxLabel(row?: Instance) {
+  checkboxLabel(row?: Instance): string {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
