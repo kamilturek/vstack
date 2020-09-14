@@ -16,4 +16,4 @@ class InstanceRetrieveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Instance
-        fields = ['id', 'name', 'container_id', 'image']
+        fields = ['id', 'name', 'container_id', 'status', 'image']

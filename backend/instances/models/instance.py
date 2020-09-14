@@ -20,6 +20,12 @@ class Instance(models.Model):
     def __str__(self) -> str:
         return f'{self.container_id} {self.image}'
 
+    @property
+    def status(self) -> str:
+        client = docker.from_env()
+        container = client.containers.get(self.container_id)
+        return container.status
+
     def run(self) -> Container:
         client = docker.from_env()
         container = client.containers.run(
