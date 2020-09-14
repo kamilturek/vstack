@@ -9,7 +9,7 @@ import { InstanceStoreService } from '@app/modules/instances/stores/instance-sto
 export class InstancesManagementComponent {
 
   constructor(private instanceStore: InstanceStoreService) { }
-  
+
   refresh(): void {
     this.instanceStore.refresh();
   }

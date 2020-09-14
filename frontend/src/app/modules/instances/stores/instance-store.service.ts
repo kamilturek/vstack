@@ -9,17 +9,17 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class InstanceStoreService {
 
   instances$: Observable<Instance[]>;
-  private _instances$: BehaviorSubject<Instance[]>;
+  private instances: BehaviorSubject<Instance[]>;
 
   constructor(private instanceService: InstanceService) {
-    this._instances$ = new BehaviorSubject<Instance[]>([]);
-    this.instances$ = this._instances$.asObservable();
+    this.instances = new BehaviorSubject<Instance[]>([]);
+    this.instances$ = this.instances.asObservable();
     this.refresh();
   }
 
   refresh(): void {
     this.instanceService.getInstances().subscribe(
-      (instances: Instance[]) => this._instances$.next(instances)
+      (instances: Instance[]) => this.instances.next(instances)
     );
   }
 }
