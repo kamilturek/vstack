@@ -14,4 +14,8 @@ export class InstanceService {
     getInstances(): Observable<Instance[]> {
         return this.http.get<Instance[]>(`${baseUrl}/api/instances/`);
     }
+
+    delete(instance: Instance): Observable<{}> {
+        return this.http.delete<{}>(`${baseUrl}/api/instances/${instance.id}/`);
+    }
 }

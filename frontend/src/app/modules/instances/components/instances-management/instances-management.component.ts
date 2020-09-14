@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
+import { Instance } from '@app/modules/instances/interfaces/instance';
+import { InstanceService } from '@app/modules/instances/services/instance.service';
 import { InstanceStoreService } from '@app/modules/instances/stores/instance-store.service';
+import { SnackBarService } from '@shared/services/snack-bar.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-instances-management',
@@ -8,9 +12,31 @@ import { InstanceStoreService } from '@app/modules/instances/stores/instance-sto
 })
 export class InstancesManagementComponent {
 
-  constructor(private instanceStore: InstanceStoreService) { }
+  constructor(
+    public instanceStore: InstanceStoreService,
+    private instanceService: InstanceService,
+    private snackBar: SnackBarService
+  ) { }
 
   refresh(): void {
     this.instanceStore.refresh();
+  }
+
+  delete(): void {
+    const selected = this.instanceStore.selection.selected;
+    forkJoin(
+      selected.map(
+        (instance: Instance) => this.instanceService.delete(instance)
+      )
+    ).subscribe(
+      () => {
+        this.instanceStore.refresh();
+        this.snackBar.open(
+          selected.length > 1 ?
+            `Deleted ${selected.length} instances.` :
+            `Deleted ${selected[0].name} (${selected[0].container_id}).`
+        );
+      }
+    );
   }
 }

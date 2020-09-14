@@ -1,3 +1,4 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { Injectable } from '@angular/core';
 import { Instance } from '@app/modules/instances/interfaces/instance';
 import { InstanceService } from '@app/modules/instances/services/instance.service';
@@ -9,6 +10,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class InstanceStoreService {
 
   instances$: Observable<Instance[]>;
+  selection = new SelectionModel<Instance>(true, []);
   private instances: BehaviorSubject<Instance[]>;
 
   constructor(private instanceService: InstanceService) {
@@ -21,5 +23,6 @@ export class InstanceStoreService {
     this.instanceService.getInstances().subscribe(
       (instances: Instance[]) => this.instances.next(instances)
     );
+    this.selection.clear();
   }
 }

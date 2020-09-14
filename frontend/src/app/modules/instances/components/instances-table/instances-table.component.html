@@ -1,4 +1,21 @@
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z5" fxFlex fxFlexFill>
+    <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null"
+                          [checked]="instanceStore.selection.hasValue() && isAllSelected()"
+                          [indeterminate]="instanceStore.selection.hasValue() && !isAllSelected()"
+                          [aria-label]="checkboxLabel()">
+            </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? instanceStore.selection.toggle(row) : null"
+                          [checked]="instanceStore.selection.isSelected(row)"
+                          [aria-label]="checkboxLabel(row)">
+            </mat-checkbox>
+        </td>
+    </ng-container>
+    
     <ng-container matColumnDef="container_id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
         <td mat-cell *matCellDef="let element">{{ element.container_id }}</td>

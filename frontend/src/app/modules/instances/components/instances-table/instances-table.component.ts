@@ -11,13 +11,13 @@ import { InstanceStoreService } from '@app/modules/instances/stores/instance-sto
   styleUrls: ['./instances-table.component.scss']
 })
 export class InstancesTableComponent implements OnInit, OnChanges {
-  displayedColumns = ['container_id', 'name', 'status', 'image'];
+  displayedColumns = ['select', 'container_id', 'name', 'status', 'image'];
   dataSource: MatTableDataSource<Instance>;
 
   @Input() filter: string;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private instanceStore: InstanceStoreService) { }
+  constructor(public instanceStore: InstanceStoreService) { }
 
   ngOnInit(): void {
     this.instanceStore.instances$.subscribe((instances: Instance[]) => {
@@ -30,5 +30,24 @@ export class InstancesTableComponent implements OnInit, OnChanges {
     if (this.dataSource) {
       this.dataSource.filter = this.filter;
     }
+  }
+
+  isAllSelected(): boolean {
+    const numSelected = this.instanceStore.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  masterToggle(): void {
+    this.isAllSelected() ?
+      this.instanceStore.selection.clear() :
+      this.dataSource.data.forEach(row => this.instanceStore.selection.select(row));
+  }
+
+  checkboxLabel(row?: Instance) {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.instanceStore.selection.isSelected(row) ? 'deselect' : 'select'} instance ${row.id}`;
   }
 }
