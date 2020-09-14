@@ -1,1 +1,4 @@
-<app-instances-table></app-instances-table>
+<app-instances-management></app-instances-management>
+<mat-divider></mat-divider>
+<app-instances-filter (filterInput)="onFilterInput($event)"></app-instances-filter>
+<app-instances-table [filter]="filter"></app-instances-table>

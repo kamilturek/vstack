@@ -5,11 +5,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './instances.component.html',
   styleUrls: ['./instances.component.scss']
 })
-export class InstancesComponent implements OnInit {
+export class InstancesComponent {
+  filter: string;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  onFilterInput(value: string): void {
+    this.filter = value;
   }
-
 }

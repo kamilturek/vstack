@@ -1,27 +1,34 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Instance } from '@app/modules/instances/interfaces/instance';
-import { InstanceService } from '@app/modules/instances/services/instance.service';
+import { InstanceStoreService } from '@app/modules/instances/stores/instance-store.service';
 
 
 @Component({
-    selector: 'app-instances-table',
-    templateUrl: './instances-table.component.html',
-    styleUrls: ['./instances-table.component.scss']
+  selector: 'app-instances-table',
+  templateUrl: './instances-table.component.html',
+  styleUrls: ['./instances-table.component.scss']
 })
-export class InstancesTableComponent implements OnInit {
-    displayedColumns = ['container_id', 'name', 'image'];
-    dataSource: MatTableDataSource<Instance>;
+export class InstancesTableComponent implements OnInit, OnChanges {
+  displayedColumns = ['container_id', 'name', 'status', 'image'];
+  dataSource: MatTableDataSource<Instance>;
 
-    @ViewChild(MatSort) sort: MatSort;
+  @Input() filter: string;
+  @ViewChild(MatSort) sort: MatSort;
 
-    constructor(private instanceService: InstanceService) { }
+  constructor(private instanceStore: InstanceStoreService) { }
 
-    ngOnInit(): void {
-        this.instanceService.getInstances().subscribe((instances: Instance[]) => {
-            this.dataSource = new MatTableDataSource(instances);
-            this.dataSource.sort = this.sort;
-        });
+  ngOnInit(): void {
+    this.instanceStore.instances$.subscribe((instances: Instance[]) => {
+      this.dataSource = new MatTableDataSource(instances);
+      this.dataSource.sort = this.sort;
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.dataSource) {
+      this.dataSource.filter = this.filter;
     }
+  }
 }
