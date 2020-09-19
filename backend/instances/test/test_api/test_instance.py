@@ -65,7 +65,7 @@ class InstanceAPITestCase(AuthAPITestCase):
     @mock.patch.object(Instance, 'status', new_callable=mock.PropertyMock, return_value='running')
     def test_create(self, mock_status, mock_run):
         response = self.client.post(
-            self.URL, 
+            self.URL,
             {
                 'name': 'new instance',
                 'image': self.image.id,
