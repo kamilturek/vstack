@@ -7,6 +7,7 @@ import { MaterialModule } from '@app/modules/material/material.module';
 import { InstancesFilterComponent } from './components/instances-filter/instances-filter.component';
 import { FormsModule } from '@angular/forms';
 import { InstancesManagementComponent } from './components/instances-management/instances-management.component';
+import { InstancesCreateComponent } from './components/instances-create/instances-create.component';
 
 
 
@@ -16,6 +17,7 @@ import { InstancesManagementComponent } from './components/instances-management/
         InstancesTableComponent,
         InstancesFilterComponent,
         InstancesManagementComponent,
+        InstancesCreateComponent,
     ],
     imports: [
         CommonModule,

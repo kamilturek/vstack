@@ -1,0 +1,20 @@
+form {
+    mat-slider {
+        width: 100%;
+        padding: 0;
+    }
+    
+    button {
+        width: 100%;
+    }
+
+    margin: 0 10px;
+}
+
+div.dialog {
+    min-width: 600px;
+}
+
+mat-dialog-content {
+    padding: 20px 20px;
+}

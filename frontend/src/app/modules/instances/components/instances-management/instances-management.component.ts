@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { InstancesCreateComponent } from '@app/modules/instances/components/instances-create/instances-create.component';
 import { Instance } from '@app/modules/instances/interfaces/instance';
 import { InstanceService } from '@app/modules/instances/services/instance.service';
 import { InstanceStoreService } from '@app/modules/instances/stores/instance-store.service';
@@ -15,8 +17,13 @@ export class InstancesManagementComponent {
   constructor(
     public instanceStore: InstanceStoreService,
     private instanceService: InstanceService,
-    private snackBar: SnackBarService
+    private snackBar: SnackBarService,
+    private dialog: MatDialog
   ) { }
+
+  add(): void {
+    this.dialog.open(InstancesCreateComponent);
+  }
 
   refresh(): void {
     this.instanceStore.refresh();

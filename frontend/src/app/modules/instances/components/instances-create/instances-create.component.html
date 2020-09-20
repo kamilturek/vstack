@@ -1,0 +1,132 @@
+<div class="dialog">
+    <h1 mat-dialog-title>Add Instance</h1>
+    <mat-dialog-content>
+        <form>
+            <mat-accordion multi displayMode="flat">
+                <mat-expansion-panel class="mat-elevation-z1">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Name
+                        </mat-panel-title>
+                        <mat-panel-description fxFlex="none">
+                            <mat-icon>
+                                edit
+                            </mat-icon>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <mat-form-field fxFlex>
+                        <input matInput placeholder="Instance Name" type="text" name="instance">
+                    </mat-form-field>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel class="mat-elevation-z1">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Image
+                        </mat-panel-title>
+                        <mat-panel-description fxFlex="none">
+                            <mat-icon>
+                                filter_none
+                            </mat-icon>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <div>
+                        <button mat-stroked-button color="primary">Select</button>
+                    </div>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel class="mat-elevation-z1">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            CPU
+                        </mat-panel-title>
+                        <mat-panel-description fxFlex="none">
+                            <mat-icon>
+                                priority_high
+                            </mat-icon>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <div>
+                        <h5>CPU shares (relative weight)</h5>
+                        <mat-slider color="primary" min="0" max="100" step="1" thumbLabel value="100"></mat-slider>
+                    </div>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel class="mat-elevation-z1">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Memory
+                        </mat-panel-title>
+                        <mat-panel-description fxFlex="none">
+                            <mat-icon>
+                                memory
+                            </mat-icon>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <h5>Memory Limit</h5>
+                    <div fxLayout="row" fxLayoutGap="15px">
+                        <mat-form-field fxFlex>
+                            <input matInput type="number" name="memory-limit" value="1">
+                        </mat-form-field>
+                        <mat-form-field fxFlex="none">
+                            <mat-select value="g">
+                                <mat-option value="b">B</mat-option>
+                                <mat-option value="k">KB</mat-option>
+                                <mat-option value="g">GB</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel class="mat-elevation-z1">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            User
+                        </mat-panel-title>
+                        <mat-panel-description fxFlex="none">
+                            <mat-icon>
+                                person
+                            </mat-icon>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel class="mat-elevation-z1">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Environment
+                        </mat-panel-title>
+                        <mat-panel-description fxFlex="none">
+                            <mat-icon>
+                                settings
+                            </mat-icon>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <h5>Environment Variables</h5>
+                    <div fxLayout="row" fxLayoutGap="15px">
+                        <mat-form-field fxFlex>
+                            <input matInput placeholder="Key" type="text" name="key">
+                        </mat-form-field>
+                        <mat-form-field fxFlex>
+                            <input matInput placeholder="Value" type="text" name="key">
+                        </mat-form-field>
+                        <div fxFlex="8">
+                            <button mat-button color="primary">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button cdkFocusInitial>Add</button>
+    </mat-dialog-actions>
+</div>
