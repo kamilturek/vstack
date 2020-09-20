@@ -3,11 +3,9 @@ import argparse
 import datetime
 import os
 from operator import itemgetter
-from typing import Dict, List, NoReturn, Optional, Union
+from typing import Dict, Iterable, NoReturn, Optional, Union
 
-import docker
-from azure.storage.blob import BlobClient, ContainerClient
-from docker.models.containers import Container
+from utils import Database, Storage
 
 
 CONTAINER = 'vstack_db_1'
@@ -23,65 +21,41 @@ def verify_args(args: argparse.Namespace) -> Optional[NoReturn]:
             raise KeyError(f'\'{arg}\' argument was not provided and environment variable was not set.')
 
 
-def get_blobs(conn_str: str) -> List[Dict]:
-    container = ContainerClient.from_connection_string(conn_str=conn_str, container_name='backup')
-    return container.list_blobs()
+def get_latest_blob(blobs: Iterable[Dict]) -> Dict:
+    return sorted(blobs, key=itemgetter('creation_time'), reverse=True)[0]
 
 
-def sort_by_modification_time(blobs: List[Dict]) -> List[Dict]:
-    return sorted(blobs, key=itemgetter('last_modified'), reverse=True)
-
-
-def get_latest_blob(conn_str: str) -> Dict:
-    blobs = get_blobs(conn_str)
-    return sort_by_modification_time(blobs)[0]
-
-
-def get_blob_by_date(conn_str: str, date: datetime.date) -> Union[Dict, NoReturn]:
-    blobs = get_blobs(conn_str)
+def get_blob_by_date(blobs: Iterable[Dict], date: datetime.date) -> Union[Dict, NoReturn]:
     for blob in blobs:
-        if blob['last_modified'].date() == date:
+        if blob['creation_time'].date() == date:
             return blob
     raise KeyError(f'The file dated {date} does not exist.')
 
 
-def get_container(container_name: str) -> Container:
-    client = docker.from_env()
-    return client.containers.get(container_name)
+def get_blob(conn_str: str, date: Optional[datetime.date]) -> Dict:
+    blobs = Storage(args.conn_str, 'backup').list()
+    if date is not None:
+        return get_blob_by_date(blobs, date)
+    return get_latest_blob(blobs)
 
 
-def download(conn_str: str, blob_name: str) -> str:
-    blob = BlobClient.from_connection_string(conn_str=conn_str, container_name='backup', blob_name=blob_name)
-    filepath = f'/tmp/{blob_name}'
-    with open(filepath, 'wb') as f:
-        blob_data = blob.download_blob()
-        blob_data.readinto(f)
+def download(conn_str: str, blob_name: str, file_path: str) -> None:
+    Storage(conn_str, 'backup').download(blob_name, file_path)
     print(f'Downloaded {blob_name}.')
-    return filepath
 
 
-def restore(container: Container, user: str, dbname: str, filepath: str) -> Optional[NoReturn]:
-    with open(filepath, 'rb') as f:
-        data = f.read()
-    container.put_archive(os.path.dirname(filepath), data)
-    command = f'/bin/bash -c "pg_restore -U {user} -d {dbname}'
-    exit_code, output = container.exec_run(f'{command} {filepath}"')
-    if exit_code != 0:
-        exit_code, output = container.exec_run(f'{command} --clean {filepath}"')
-    if exit_code == 0:
-        print(f'Restored {os.path.basename(filepath)}.')
-    else:
-        raise Exception(output)
+def restore(container_name: str, user: str, db_name: str, file_path: str) -> Optional[NoReturn]:
+    file_name = os.path.basename(file_path)
+    Database(container_name, user, db_name).restore(file_path)
+    print(f'Restored {file_name}.')
 
 
 def download_and_restore(args: argparse.Namespace) -> None:
-    if args.date is None:
-        blob = get_latest_blob(args.conn_str)
-    else:
-        blob = get_blob_by_date(args.conn_str, args.date)
-    filepath = download(args.conn_str, blob['name'])
-    container = get_container(args.container)
-    restore(container, args.user, args.dbname, filepath)
+    blob = get_blob(args.conn_str, args.date)
+    file_path = f'/tmp/{blob["name"]}'
+    download(args.conn_str, blob['name'], file_path)
+    restore(args.container, args.user, args.dbname, file_path)
+    os.remove(file_path)
 
 
 if __name__ == '__main__':

@@ -4,9 +4,7 @@ import os
 import datetime
 from typing import NoReturn, Optional
 
-import docker
-from docker.models.containers import Container
-from azure.storage.blob import BlobClient
+from utils import Database, Storage
 
 
 CONTAINER = 'vstack_db_1'
@@ -22,43 +20,30 @@ def verify_args(args: argparse.Namespace) -> Optional[NoReturn]:
             raise KeyError(f'\'{arg}\' argument was not provided and environment variable was not set.')
 
 
-def get_container(container_name: str) -> Container:
-    client = docker.from_env()
-    return client.containers.get(container_name)
-
-
-def get_filepath() -> str:
+def create_filepath() -> str:
     suffix = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
     filename = f'vstack_db_{suffix}.tar'
     filepath = f'/tmp/{filename}'
     return filepath
 
 
-def dump(container: Container, user: str, dbname: str, filepath: str) -> Optional[NoReturn]:
-    exit_code, output = container.exec_run(f'/bin/bash -c "pg_dump -U {user} -F t {dbname} > {filepath}"')
-    if exit_code == 0:
-        bits, stat = container.get_archive(filepath)
-        with open(filepath, 'wb') as f:
-            for chunk in bits:
-                f.write(chunk)
-        print(f'Dumped {os.path.basename(filepath)}.')
-    else:
-        raise Exception(output)
+def dump(container_name: str, user: str, db_name: str, file_path: str) -> None:
+    file_name = os.path.basename(file_path)
+    Database(container_name, user, db_name).dump(file_path)
+    print(f'Dumped {file_name}')
 
 
-def upload(conn_str: str, filepath: str) -> None:
-    filename = os.path.basename(filepath)
-    blob = BlobClient.from_connection_string(conn_str=conn_str, container_name='backup', blob_name=filename)
-    with open(filepath, 'rb') as f:
-        blob.upload_blob(f)
-    print(f'Uploaded {filename}.')
+def upload(conn_str: str, file_path: str) -> None:
+    file_name = os.path.basename(file_path)
+    Storage(conn_str, 'backup').upload(file_path)
+    print(f'Uploaded {file_name}.')
 
 
 def dump_and_upload(args: argparse.Namespace) -> None:
-    container = get_container(args.container)
-    filepath = get_filepath()
-    dump(container, args.user, args.dbname, filepath)
-    upload(args.conn_str, filepath)
+    file_path = create_filepath()
+    dump(args.container, args.user, args.dbname, file_path)
+    upload(args.conn_str, file_path)
+    os.remove(file_path)
 
 
 if __name__ == '__main__':
