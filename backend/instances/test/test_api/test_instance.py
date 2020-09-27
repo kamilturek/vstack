@@ -29,6 +29,7 @@ class InstanceAPITestCase(AuthAPITestCase):
             'container_id': instance.container_id,
             'status': 'running',
             'image': {
+                'id': self.image.id,
                 'name': self.image.name,
                 'tag': self.image.tag,
                 'image_url': self.image.image_url,
@@ -52,6 +53,7 @@ class InstanceAPITestCase(AuthAPITestCase):
                 'container_id': instance.container_id,
                 'status': 'running',
                 'image': {
+                    'id': self.image.id,
                     'name': self.image.name,
                     'tag': self.image.tag,
                     'image_url': self.image.image_url,
