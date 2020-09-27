@@ -10,7 +10,7 @@ class RegisterUserAPITestCase(APITestCase):
         response = self.client.post(
             self.URL,
             {
-                'username': 'user',
+                'email': 'user@user.com',
                 'password': 'pwd',
             }
         )
@@ -18,13 +18,13 @@ class RegisterUserAPITestCase(APITestCase):
 
     def test_register_existing_user(self):
         User.objects.create_user(
-            username='user',
+            email='user@user.com',
             password='pwd'
         )
         response = self.client.post(
             self.URL,
             {
-                'username': 'user',
+                'email': 'user@user.com',
                 'password': 'pwd',
             }
         )

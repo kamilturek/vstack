@@ -4,18 +4,18 @@ from users.models import User
 
 
 class LoginUserAPITestCase(APITestCase):
-    URL = '/api/auth/'
+    URL = '/api/users/login/'
 
     def test_login_existing_user(self):
         User.objects.create_user(
-            username='user',
+            email='user@user.com',
             password='pwd'
         )
 
         response = self.client.post(
             self.URL,
             {
-                'username': 'user',
+                'email': 'user@user.com',
                 'password': 'pwd',
             }
         )
@@ -26,7 +26,7 @@ class LoginUserAPITestCase(APITestCase):
         response = self.client.post(
             self.URL,
             {
-                'username': 'user',
+                'email': 'user@user.com',
                 'password': 'pwd'
             }
         )

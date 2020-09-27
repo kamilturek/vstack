@@ -5,6 +5,7 @@ import { Credentials } from 'src/app/shared/interfaces/credentials';
 import { catchError, tap } from 'rxjs/operators';
 import { Observable, EMPTY } from 'rxjs';
 import { SnackBarService } from '@shared/services/snack-bar.service';
+import { baseUrl } from '@environment/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -22,7 +23,7 @@ export class AuthService {
     }
 
     login(credentials: Credentials): Observable<{ token: string }> {
-        return this.http.post(`http://localhost:8000/api/auth/`, credentials).pipe(
+        return this.http.post(`${baseUrl}/api/users/login/`, credentials).pipe(
             catchError((error: HttpErrorResponse) => {
                 if (error.status === 400) {
                     this.snackBarService.open('Unable to login with provided credentials.');

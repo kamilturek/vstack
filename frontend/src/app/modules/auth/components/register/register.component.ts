@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
 import { AuthService } from '../../auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SnackBarService } from '@shared/services/snack-bar.service';
 import { switchMapTo } from 'rxjs/operators';
+import { passwordMismatchValidator } from '@app/modules/settings/components/password-settings/password-settings.component';
+
 
 @Component({
     selector: 'app-register',
@@ -14,9 +16,9 @@ import { switchMapTo } from 'rxjs/operators';
 export class RegisterComponent {
 
     registerForm = new FormGroup({
-        username: new FormControl('', [Validators.required]),
-        password: new FormControl('', [Validators.required]),
-        passwordConfirmation: new FormControl('', [Validators.required])
+        email: new FormControl('', [Validators.required, Validators.email]),
+        password: new FormControl('', Validators.required),
+        passwordConfirmation: new FormControl('', Validators.required)
     }, { validators: passwordMismatchValidator });
 
     constructor(
@@ -41,8 +43,8 @@ export class RegisterComponent {
         ).subscribe(
             () => this.snackBarService.open('Registered successfully.'),
             (error: HttpErrorResponse) => {
-                if (error.status === 400 && error.error['username']) {
-                    this.snackBarService.open('Provided username already exists.');
+                if (error.status === 400 && error.error['email']) {
+                    this.snackBarService.open('Provided email has been already registered.');
                 } else {
                     this.snackBarService.open('Something went wrong.');
                 }
@@ -50,10 +52,3 @@ export class RegisterComponent {
         );
     }
 }
-
-export const passwordMismatchValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
-    const password = control.get('password').value;
-    const passwordConfirmation = control.get('passwordConfirmation').value;
-
-    return password !== passwordConfirmation ? { passwordMismatch: true } : null;
-};

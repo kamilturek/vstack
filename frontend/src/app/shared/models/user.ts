@@ -3,7 +3,7 @@ import { baseUrl } from 'src/environments/environment';
 
 export class UserModel implements User {
     id: number;
-    username: string;
+    email: string;
     avatar: string;
 
     get avatarUrl(): string {

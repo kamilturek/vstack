@@ -8,14 +8,14 @@ class CurrentUserAPITestCase(APITestCase):
 
     def test_get_current_logged_user(self):
         user = User.objects.create_user(
-            username='user',
+            email='user@user.com',
             password='pwd'
         )
         self.client.force_authenticate(user=user)
         response = self.client.get(self.URL)
         expected_response = {
             'id': user.id,
-            'username': 'user',
+            'email': 'user@user.com',
             'avatar': 'media/avatars/no_avatar.png',
         }
         self.assertEqual(200, response.status_code)

@@ -12,7 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'password', 'avatar']
+        fields = ['id', 'email', 'password', 'avatar']
 
     def create(self, validated_data: Dict) -> User:
         return User.objects.create_user(**validated_data)
