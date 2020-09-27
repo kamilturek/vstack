@@ -5,14 +5,14 @@ from rest_framework import serializers
 
 from django.core.files.base import ContentFile
 
-from users.models import UserProfile
+from users.models import User
 
 
 class AvatarSerializer(serializers.Serializer):
     avatar = fields.Base64ImageField()
 
-    def create(self, validated_data: Dict[str, ContentFile]) -> UserProfile:
-        profile = self.context['user'].profile
-        profile.avatar = validated_data.pop('avatar')
-        profile.save()
-        return profile
+    def create(self, validated_data: Dict[str, ContentFile]) -> User:
+        user = self.context['user']
+        user.avatar = validated_data.pop('avatar')
+        user.save()
+        return user

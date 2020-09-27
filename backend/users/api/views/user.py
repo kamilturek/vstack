@@ -6,9 +6,8 @@ from rest_framework.exceptions import NotAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from django.contrib.auth.models import User
-
 from users.api.serializers import AvatarSerializer, PasswordSerializer, UserSerializer
+from users.models import User
 
 
 class UserViewSet(viewsets.ModelViewSet):

@@ -2,13 +2,13 @@ from typing import Dict
 
 from rest_framework import serializers
 
-from django.contrib.auth.models import User
+from users.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
 
     password = serializers.CharField(write_only=True)
-    avatar = serializers.CharField(source='profile.avatar.url', read_only=True)
+    avatar = serializers.CharField(source='avatar.url', read_only=True)
 
     class Meta:
         model = User
