@@ -3,10 +3,6 @@ form {
         width: 100%;
         padding: 0;
     }
-    
-    button {
-        width: 100%;
-    }
 
     margin: 0 10px;
 }
@@ -17,4 +13,10 @@ div.dialog {
 
 mat-dialog-content {
     padding: 20px 20px;
+}
+
+::ng-deep app-image-picker {
+    button {
+        width: 100%;
+    }
 }

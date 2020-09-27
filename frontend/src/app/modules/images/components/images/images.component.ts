@@ -1,34 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Image } from '@app/modules/images/interfaces/image';
 import { ImageService } from '@app/modules/images/services/images.service';
 
 @Component({
-    selector: 'app-images',
-    templateUrl: './images.component.html',
-    styleUrls: ['./images.component.scss']
+  selector: 'app-images',
+  templateUrl: './images.component.html',
+  styleUrls: ['./images.component.scss']
 })
 export class ImagesComponent implements OnInit {
-    imageName: string;
-    filteredImages: Image[];
-    private images: Image[];
+  @Output() imageClick = new EventEmitter<Image>();
 
-    constructor(private imageService: ImageService) { }
+  imageName: string;
+  filteredImages: Image[];
+  private images: Image[];
 
-    ngOnInit(): void {
-        this.imageService.getImages().subscribe((images: Image[]) => {
-            this.images = images;
-            this.filteredImages = images;
-        });
-    }
+  constructor(private imageService: ImageService) { }
 
-    onSearchValueChanged(name: string): void {
-        this.filteredImages = this.images.filter(
-            (image: Image) => image.name.toLowerCase().includes(name.toLowerCase())
-        );
-    }
+  ngOnInit(): void {
+    this.imageService.getImages().subscribe((images: Image[]) => {
+      this.images = images;
+      this.filteredImages = images;
+    });
+  }
 
-    clearSearchValue(): void {
-        this.imageName = '';
-        this.onSearchValueChanged(this.imageName);
-    }
+  onSearchValueChanged(name: string): void {
+    this.filteredImages = this.images.filter(
+      (image: Image) => image.name.toLowerCase().includes(name.toLowerCase())
+    );
+  }
+
+  onImageClick(image: Image): void {
+    this.imageClick.emit(image);
+  }
+
+  clearSearchValue(): void {
+    this.imageName = '';
+    this.onSearchValueChanged(this.imageName);
+  }
 }

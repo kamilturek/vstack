@@ -1,5 +1,5 @@
 <div fxFlex fxLayout="row wrap" fxLayoutAlign="space-evenly center">
     <ng-container *ngFor="let image of images">
-        <app-image-card [image]="image"></app-image-card>
+        <app-image-card [image]="image" (click)="onImageClick(image)"></app-image-card>
     </ng-container>
 </div>

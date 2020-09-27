@@ -1,12 +1,15 @@
-<div>
-    <mat-form-field fxFlex>
-        <input [(ngModel)]="imageName" (ngModelChange)="onSearchValueChanged($event)" matInput type="text"
-            placeholder="Filter" name="image">
-        <button mat-button *ngIf="imageName" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearchValue()">
-            <mat-icon>close</mat-icon>
-        </button>
-    </mat-form-field>
-</div>
-<div>
-    <app-images-list [images]="filteredImages"></app-images-list>
+<div fxLayout="column" class="images">
+    <div>
+        <mat-form-field fxFlex>
+            <input [(ngModel)]="imageName" (ngModelChange)="onSearchValueChanged($event)" matInput type="text"
+                placeholder="Filter" name="image">
+            <button mat-button *ngIf="imageName" matSuffix mat-icon-button aria-label="Clear"
+                (click)="clearSearchValue()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+    <div class="images-list">
+        <app-images-list [images]="filteredImages" (imageClick)="onImageClick($event)"></app-images-list>
+    </div>
 </div>

@@ -22,7 +22,14 @@ export class InstancesManagementComponent {
   ) { }
 
   add(): void {
-    this.dialog.open(InstancesCreateComponent);
+    const dialogRef = this.dialog.open(InstancesCreateComponent);
+    dialogRef.afterClosed().subscribe(
+      (result: { refresh?: boolean }) => {
+        if (result.refresh) {
+          this.refresh();
+        }
+      }
+    )
   }
 
   refresh(): void {
