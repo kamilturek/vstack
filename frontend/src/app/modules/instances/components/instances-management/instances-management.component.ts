@@ -29,7 +29,7 @@ export class InstancesManagementComponent {
           this.refresh();
         }
       }
-    )
+    );
   }
 
   refresh(): void {
