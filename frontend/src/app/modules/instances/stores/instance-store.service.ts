@@ -25,4 +25,8 @@ export class InstanceStoreService {
     );
     this.selection.clear();
   }
+
+  clear(): void {
+    this.instances.next([]);
+  }
 }
