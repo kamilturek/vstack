@@ -5,6 +5,16 @@ from instances.models import Instance
 
 
 class InstanceSerializer(serializers.ModelSerializer):
+
+    def create(self, validated_data):
+        instance = super().create(validated_data)
+        instance.grant_access(self.user)
+        return instance
+
+    @property
+    def user(self):
+        return self.context['request'].user
+
     class Meta:
         model = Instance
         fields = ['id', 'name', 'container_id', 'image']

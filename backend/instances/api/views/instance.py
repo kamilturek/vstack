@@ -5,7 +5,9 @@ from instances.models import Instance
 
 
 class InstanceViewSet(viewsets.ModelViewSet):
-    queryset = Instance.objects.all()
+
+    def get_queryset(self):
+        return Instance.objects.permitted(self.request.user)
 
     def get_serializer_class(self):
         if self.action in ['list', 'retrieve']:

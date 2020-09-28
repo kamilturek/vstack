@@ -3,10 +3,12 @@ from django.db import models
 import docker
 from docker.models.containers import Container
 
+from instances.managers.instance import InstanceManager
 from instances.models.image import Image
+from utils.access import AccessMixin
 
 
-class Instance(models.Model):
+class Instance(models.Model, AccessMixin):
     name = models.TextField()
     image = models.ForeignKey(
         Image,
@@ -17,8 +19,19 @@ class Instance(models.Model):
         null=True
     )
 
+    objects = InstanceManager()
+
+    class Meta:
+        permissions = (
+            ('access_instance', 'Access instance'),
+        )
+
     def __str__(self) -> str:
         return f'{self.container_id} {self.image}'
+
+    @property
+    def access_permission(self) -> str:
+        return 'access_instance'
 
     @property
     def status(self) -> str:
