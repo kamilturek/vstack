@@ -135,3 +135,4 @@ CORS_ORIGIN_ALLOW_ALL = True
 SHELL_PLUS = 'ipython'
 
 CELERY_BROKER_URL = 'amqp://localhost:5672'
+CELERY_ENABLED = False
