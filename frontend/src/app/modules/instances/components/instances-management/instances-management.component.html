@@ -11,6 +11,18 @@
         <mat-icon>get_app</mat-icon>
         <span>Export to CSV</span>
     </button>
+    <button mat-button color="accent" [disabled]="!instanceStore.selection.hasValue()">
+        <mat-icon>play_arrow</mat-icon>
+        <span>Start</span>
+    </button>
+    <button mat-button color="accent" [disabled]="!instanceStore.selection.hasValue()">
+        <mat-icon>autorenew</mat-icon>
+        <span>Restart</span>
+    </button>
+    <button mat-button color="accent" [disabled]="!instanceStore.selection.hasValue()">
+        <mat-icon>stop</mat-icon>
+        <span>Stop</span>
+    </button>
     <button mat-button color="accent" [disabled]="!instanceStore.selection.hasValue()" (click)="delete()">
         <mat-icon>delete</mat-icon>
         <span>Delete</span>
