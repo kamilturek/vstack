@@ -17,4 +17,4 @@ def run_instance(sender, instance, created, **kwargs):
 @receiver(post_delete, sender=Instance)
 def remove_instance(sender, instance, **kwargs):
     if instance.container_id:
-        instance.remove(force=True)
+        instance.remove()
