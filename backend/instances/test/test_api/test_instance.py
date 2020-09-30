@@ -22,6 +22,7 @@ class InstanceAPITestCase(AuthAPITestCase):
             name='production',
             image=self.image
         )
+        instance.grant_access(self.user)
         response = self.client.get(f'{self.URL}{instance.id}/')
         expected_response = {
             'id': instance.id,
@@ -45,6 +46,7 @@ class InstanceAPITestCase(AuthAPITestCase):
             name='production',
             image=self.image
         )
+        instance.grant_access(self.user)
         response = self.client.get(self.URL)
         expected_response = [
             {
