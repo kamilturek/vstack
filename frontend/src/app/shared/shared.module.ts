@@ -19,6 +19,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
 import { ThemeMenuComponent } from './components/theme-menu/theme-menu.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NotificationsModule } from '@app/modules/notifications/notifications.module';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         MatProgressSpinnerModule,
         MatRadioModule,
         MatToolbarModule,
+        NotificationsModule,
         ReactiveFormsModule,
         RouterModule,
     ],

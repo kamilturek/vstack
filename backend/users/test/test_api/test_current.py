@@ -16,7 +16,7 @@ class CurrentUserAPITestCase(APITestCase):
         expected_response = {
             'id': user.id,
             'email': 'user@user.com',
-            'avatar': 'media/avatars/no_avatar.png',
+            'avatar': '/media/avatars/no_avatar.png',
         }
         self.assertEqual(200, response.status_code)
         self.assertEqual(expected_response, response.data)

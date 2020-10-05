@@ -21,7 +21,7 @@ export class SidebarComponent implements OnInit {
 
     get userAvatar(): string {
         if (this.currentUser) {
-            return `${baseUrl}/${this.currentUser?.avatar}`;
+            return `${baseUrl}${this.currentUser?.avatar}`;
         }
         return '';
     }

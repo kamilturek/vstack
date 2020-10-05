@@ -16,6 +16,7 @@ DEBUG = True
 ALLOWED_HOSTS: List[str] = []
 
 INSTALLED_APPS = [
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -31,6 +32,7 @@ INSTALLED_APPS = [
 
 VSTACK_APPS = [
     'instances',
+    'notifications',
     'users',
 ]
 
@@ -67,6 +69,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'vstack.wsgi.application'
 
+ASGI_APPLICATION = 'vstack.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -136,3 +139,12 @@ SHELL_PLUS = 'ipython'
 
 CELERY_BROKER_URL = 'amqp://localhost:5672'
 CELERY_ENABLED = False
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('localhost', 6379)]
+        },
+    }
+}
