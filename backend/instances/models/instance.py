@@ -3,7 +3,7 @@ from django.db import models
 from instances.managers.instance import InstanceManager
 from instances.models.image import Image
 from instances.services.virtualization import DockerVirtualization
-from utils.access import AccessMixin
+from utils.mixins import AccessMixin
 
 
 class Instance(models.Model, AccessMixin):
