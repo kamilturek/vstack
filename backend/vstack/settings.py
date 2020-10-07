@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_extensions',
     'guardian',
+    'polymorphic',
     'rest_framework',
     'rest_framework.authtoken',
 ]
