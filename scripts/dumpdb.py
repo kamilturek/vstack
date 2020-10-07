@@ -30,7 +30,7 @@ def create_filepath() -> str:
 def dump(container_name: str, user: str, db_name: str, file_path: str) -> None:
     file_name = os.path.basename(file_path)
     Database(container_name, user, db_name).dump(file_path)
-    print(f'Dumped {file_name}')
+    print(f'Dumped {file_name}.')
 
 
 def upload(conn_str: str, file_path: str) -> None:
