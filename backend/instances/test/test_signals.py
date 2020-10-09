@@ -15,22 +15,12 @@ class InstanceSignalsTestCase(TestCase):
             image_url='url'
         )
 
-    @mock.patch.object(Instance, 'run')
-    def test_run_on_create(self, mock_run):
-        Instance.objects.create(
-            name='name',
-            image=self.image
-        )
-        mock_run.assert_called_once()
-
-    @mock.patch.object(Instance, 'run')
     @mock.patch.object(Instance, 'remove')
-    def test_remove_on_delete(self, mock_remove, mock_run):
+    def test_remove_on_delete(self, mock_remove):
         instance = Instance.objects.create(
             name='name',
             image=self.image,
             container_id='id'
         )
         instance.delete()
-        mock_run.assert_called_once()
         mock_remove.assert_called_once()
