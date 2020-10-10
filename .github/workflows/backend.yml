@@ -56,6 +56,10 @@ jobs:
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_DB: vstack
+      redis:
+        image: redis:6.0.8
+        ports:
+          - 6379:6379
 
     env:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
