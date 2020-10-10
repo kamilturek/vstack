@@ -4,7 +4,7 @@ from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 from polymorphic.models import PolymorphicModel
 
-from django.db import models
+from django.db import models, transaction
 
 from notifications.api.serializers import NotificationSerializer
 from users.models import User
@@ -14,6 +14,16 @@ NotificationType = Literal['SUCCESS', 'INFO', 'WARNING', 'ERROR']
 
 
 class Notification(PolymorphicModel):
+    """
+    Base Notification model
+    Derived models should introduce actor foreign key
+
+    actor = models.ForeignKey(
+        <ActorModel>,
+        related_name='notifications',
+        on_delete=models.CASCADE,
+    )
+    """
     recipent = models.ForeignKey(
         User,
         related_name='notifications',
@@ -30,12 +40,14 @@ class Notification(PolymorphicModel):
         return f'{self.recipent} / {self.created}'
 
     @classmethod
-    def send(cls, recipent: User, actor: models.Model) -> None:
+    @transaction.atomic
+    def send(cls, recipent: User, actor: models.Model) -> 'Notification':
         notification = cls.objects.create(
             recipent=recipent,
             actor=actor
         )
         notification._send_to_channel()
+        return notification
 
     def _send_to_channel(self) -> None:
         channel_layer = get_channel_layer()

@@ -1,8 +1,7 @@
-from django.db import models, transaction
+from django.db import models
 
 from instances.models import Instance
 from notifications.models.notification import Notification, NotificationType
-from users.models import User
 
 
 class InstanceNotification(Notification):
@@ -11,14 +10,6 @@ class InstanceNotification(Notification):
         related_name='notifications',
         on_delete=models.CASCADE,
     )
-
-    @classmethod
-    @transaction.atomic
-    def send(cls, recipent: User, instance: Instance) -> None:
-        super().send(
-            recipent=recipent,
-            actor=instance,
-        )
 
 
 class InstanceScheduledNotification(InstanceNotification):
