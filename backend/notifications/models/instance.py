@@ -2,13 +2,14 @@ from django.db import models
 
 from instances.models import Instance
 from notifications.models.notification import Notification, NotificationType
+from utils.models import NON_POLYMORPHIC_CASCADE
 
 
 class InstanceNotification(Notification):
     actor = models.ForeignKey(
         Instance,
         related_name='notifications',
-        on_delete=models.CASCADE,
+        on_delete=NON_POLYMORPHIC_CASCADE,
     )
 
 
