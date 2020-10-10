@@ -7,6 +7,6 @@ export class UserModel implements User {
     avatar: string;
 
     get avatarUrl(): string {
-        return `${baseUrl}/${this.avatar}`;
+        return `${baseUrl}${this.avatar}`;
     }
 }

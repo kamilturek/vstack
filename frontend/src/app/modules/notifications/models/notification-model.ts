@@ -1,9 +1,9 @@
 import { Notification, NotificationType } from '@app/modules/notifications/interfaces/notification';
 
 export class NotificationModel {
+  public content: string;
+  public created: string;
   private type: NotificationType;
-  private content: string;
-  private created: string;
 
   constructor(notification: Notification) {
     Object.assign(this, notification);

@@ -9,7 +9,7 @@ import { NotificationModel } from '@app/modules/notifications/models/notificatio
   styleUrls: ['./notification-snack-item.component.scss']
 })
 export class NotificationSnackItemComponent {
-  private notification: NotificationModel;
+  notification: NotificationModel;
 
   constructor(
     @Inject(MAT_SNACK_BAR_DATA) public data: Notification,
