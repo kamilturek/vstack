@@ -1,7 +1,7 @@
 celery==4.4.7
 channels==2.4.0
 channels-redis==3.1.0
-Django==3.0.8
+Django==3.1.2
 django-cors-headers==3.4.0
 django-environ==0.4.5
 django-extra-fields==3.0.0
@@ -11,3 +11,4 @@ djangorestframework==3.11.0
 docker==4.3.1
 Pillow==7.2.0
 psycopg2==2.8.5
+redis==3.5.3
