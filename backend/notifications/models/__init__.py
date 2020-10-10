@@ -1,2 +1,6 @@
 from .notification import Notification
-from .instance import InstanceFinishedNotification, InstanceScheduledNotification
+from .instance import (
+    InstanceFailedNotification,
+    InstanceFinishedNotification,
+    InstanceScheduledNotification
+)

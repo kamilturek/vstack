@@ -32,3 +32,14 @@ class InstanceFinishedNotification(InstanceNotification):
     @property
     def type(self) -> NotificationType:
         return 'SUCCESS'
+
+
+class InstanceFailedNotification(InstanceNotification):
+
+    @property
+    def content(self) -> str:
+        return f'Deployment of {self.actor.name} has failed.'
+
+    @property
+    def type(self) -> NotificationType:
+        return 'ERROR'

@@ -35,6 +35,8 @@ class Instance(models.Model, AccessMixin):
 
     @property
     def status(self) -> str:
+        if self.container_id is None:
+            return 'Corrupted'
         vm = self.virtualization.get_vm(self.container_id)
         return vm.status
 
