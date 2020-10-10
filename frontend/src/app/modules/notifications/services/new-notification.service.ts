@@ -35,7 +35,7 @@ export class NewNotificationService {
   }
 
   private authenticate(): void {
-    this.socket$.next({ 'token': this.authService.token });
+    this.socket$.next({ token: this.authService.token });
   }
 
   private getNewWebSocket(): WebSocketSubject<Notification | { token: string }> {

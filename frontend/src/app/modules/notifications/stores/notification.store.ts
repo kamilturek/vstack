@@ -9,15 +9,15 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class NotificationStore {
 
   readonly notifications$: Observable<Notification[]>;
-  private _notifications$ = new BehaviorSubject<Notification[]>([]);
+  private notificationsList$ = new BehaviorSubject<Notification[]>([]);
 
   constructor(private notificationService: NotificationService) {
-    this.notifications$ = this._notifications$.asObservable();
+    this.notifications$ = this.notificationsList$.asObservable();
   }
 
   refresh(): void {
     this.notificationService.getNotifications().subscribe(
-      (notifications: Notification[]) => this._notifications$.next(notifications)
+      (notifications: Notification[]) => this.notificationsList$.next(notifications)
     );
   }
 }

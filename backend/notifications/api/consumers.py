@@ -1,9 +1,7 @@
-from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 
 from django.core.exceptions import ValidationError
 
-from notifications.models import Notification
 from utils.api.ws import WebSocketTokenAuthentication
 
 
