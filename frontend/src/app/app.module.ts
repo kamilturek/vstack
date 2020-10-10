@@ -8,6 +8,7 @@ import { DefaultModule } from './layouts/default/default.module';
 import { ImagesModule } from './modules/images/images.module';
 import { InstancesModule } from './modules/instances/instances.module';
 import { SharedModule } from './shared/shared.module';
+import { TimeagoModule } from 'ngx-timeago';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { SharedModule } from './shared/shared.module';
         ImagesModule,
         InstancesModule,
         SharedModule,
+        TimeagoModule.forRoot(),
     ],
     providers: [],
     bootstrap: [AppComponent]

@@ -22,8 +22,7 @@ class NotificationConsumer(AsyncJsonWebsocketConsumer):
         await self.authenticate(content)
 
     async def notification_new(self, event):
-        print(event)
-        pass
+        await self.send_json(event['data'])
 
     async def authenticate(self, content):
         if not self.auth.is_authenticated:
@@ -33,21 +32,9 @@ class NotificationConsumer(AsyncJsonWebsocketConsumer):
                 return self.close()
             else:
                 await self.enable_group()
-                await self.resend_unread()
 
     async def enable_group(self):
         await self.channel_layer.group_add(f'user_{self.scope["user"].id}', self.channel_name)
 
     async def disable_group(self):
         await self.channel_layer.group_discard(f'user_{self.scope["user"].id}', self.channel_name)
-
-    @database_sync_to_async
-    def resend_unread(self):
-        unread = Notification.objects.filter(
-            read=False,
-            recipent=self.auth.user,
-        ).order_by(
-            'created'
-        )
-        for notification in unread:
-            notification._send_to_channel()

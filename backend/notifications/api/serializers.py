@@ -6,3 +6,4 @@ class NotificationSerializer(serializers.Serializer):
     created = serializers.DateTimeField()
     content = serializers.CharField()
     type = serializers.CharField()
+    read = serializers.BooleanField()

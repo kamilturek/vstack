@@ -1,15 +1,23 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from '@app/modules/auth/auth.service';
-import { webSocket } from 'rxjs/webSocket';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { NewNotificationService } from '@app/modules/notifications/services/new-notification.service';
+import { Notification } from '@app/modules/notifications/interfaces/notification';
+import { baseUrl } from '@environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
 
-  constructor(private authService: AuthService) {
-    const subject = webSocket(`ws://localhost:8000/ws/notifications/`);
-    subject.subscribe(console.log);
-    subject.next({'token': authService.token});
+  constructor(
+    private http: HttpClient,
+    private newNotificationService: NewNotificationService
+  ) {
+    this.newNotificationService.connect();
+  }
+
+  getNotifications(): Observable<Notification[]> {
+    return this.http.get<Notification[]>(`${baseUrl}/api/notifications`);
   }
 }
