@@ -16,6 +16,7 @@ DEBUG = True
 ALLOWED_HOSTS: List[str] = []
 
 INSTALLED_APPS = [
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -25,12 +26,14 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_extensions',
     'guardian',
+    'polymorphic',
     'rest_framework',
     'rest_framework.authtoken',
 ]
 
 VSTACK_APPS = [
     'instances',
+    'notifications',
     'users',
 ]
 
@@ -67,6 +70,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'vstack.wsgi.application'
 
+ASGI_APPLICATION = 'vstack.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -138,3 +142,12 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_ENABLED = False
 CELERY_TASK_SERIALIZER = 'json'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('localhost', 6379)]
+        },
+    }
+}

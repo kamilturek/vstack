@@ -1,0 +1,8 @@
+<button mat-button
+        [matBadge]="count$ | async"
+        [matBadgeHidden]="(count$ | async) === 0"
+        matBadgeColor="accent"
+        matBadgeOverlap="true"
+        (click)="openPanel()">
+    <mat-icon>notifications</mat-icon>
+</button>

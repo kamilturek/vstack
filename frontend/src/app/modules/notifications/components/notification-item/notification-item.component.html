@@ -1,0 +1,13 @@
+<div class="notification-item">
+    <mat-icon [ngStyle]="{'color': notification.color}">
+        {{ notification.icon }}
+    </mat-icon>
+    <div>
+        <p class="content">
+            {{ notification.content }}
+        </p>
+        <p class="created">
+            {{ notification.created | timeago }}
+        </p>
+    </div>
+</div>

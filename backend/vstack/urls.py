@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from instances.api.urls import urlpatterns as instances_urlpatterns
+from notifications.api.urls import urlpatterns as notifications_urlpatterns
 from users.api.urls import urlpatterns as users_urlpatterns
 
 
@@ -13,4 +14,5 @@ urlpatterns = [
 ]
 
 urlpatterns += instances_urlpatterns
+urlpatterns += notifications_urlpatterns
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

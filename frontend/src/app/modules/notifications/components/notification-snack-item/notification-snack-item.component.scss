@@ -1,0 +1,15 @@
+div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+mat-icon {
+    margin-right: 10px;
+}
+
+span {
+    flex: 1;
+    text-align: center;
+}

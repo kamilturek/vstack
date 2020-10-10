@@ -82,5 +82,6 @@ class InstanceAPITestCase(AuthAPITestCase):
             'container_id': instance.container_id,
             'image': self.image.id,
         }
+        mock_run.assert_called_once()
         self.assertEqual(201, response.status_code)
         self.assertEqual(expected_response, response.data)

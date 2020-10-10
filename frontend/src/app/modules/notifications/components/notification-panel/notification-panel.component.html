@@ -1,0 +1,8 @@
+<ng-container *ngIf="(notifications$ | async) as notifications">
+    <div *ngFor="let notification of notifications">
+        <app-notification-item [data]="notification"></app-notification-item>
+    </div>
+    <p *ngIf="notifications.length === 0">
+        No new notifications.
+    </p>
+</ng-container>

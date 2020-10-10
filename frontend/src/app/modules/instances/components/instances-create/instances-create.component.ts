@@ -42,11 +42,8 @@ export class InstancesCreateComponent implements OnInit {
       const { name, image } = this.instanceForm.value;
       const newInstance = new InstanceModel(name, image);
       this.instanceService.create(newInstance.data).subscribe(
-        (instance: Instance) => {
-          this.snackBar.open(`Instance ${instance.name} (${instance.container_id}) has been created.`);
-          this.dialogRef.close({ refresh: true });
-        },
-        (error: HttpErrorResponse) => this.snackBar.open('Something went wrong')
+        () => this.dialogRef.close({ refresh: true }),
+        () => this.snackBar.open('Something went wrong')
       );
     }
   }
