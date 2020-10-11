@@ -1,5 +1,6 @@
 <div class="notification-item">
-    <mat-icon [ngStyle]="{'color': notification.color}">
+    <mat-icon class="notification-type"
+              [ngStyle]="{'color': notification.color}">
         {{ notification.icon }}
     </mat-icon>
     <div>
@@ -9,5 +10,16 @@
         <p class="created">
             {{ notification.created | timeago }}
         </p>
+    </div>
+    <div class="buttons">
+        <mat-icon *ngIf="!notification.read"
+                  matTooltip="Mark notification as read"
+                  (click)="onReadClick()">
+            check
+        </mat-icon>
+        <mat-icon matTooltip="Delete notification"
+                  (click)="onDeleteClick()">
+            delete
+        </mat-icon>
     </div>
 </div>

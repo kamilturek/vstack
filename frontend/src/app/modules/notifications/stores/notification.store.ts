@@ -16,8 +16,23 @@ export class NotificationStore {
   }
 
   refresh(): void {
-    this.notificationService.getNotifications().subscribe(
+    this.notificationService.getAll().subscribe(
       (notifications: Notification[]) => this.notificationsList$.next(notifications)
+    );
+  }
+
+  read(notification: Notification): void {
+    this.notificationService.patch({
+      id: notification.id,
+      read: true,
+    }).subscribe(
+      () => this.refresh()
+    );
+  }
+
+  delete(notification: Notification): void {
+    this.notificationService.delete(notification).subscribe(
+      () => this.refresh()
     );
   }
 }

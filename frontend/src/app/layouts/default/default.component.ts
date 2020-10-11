@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NewNotificationService } from '@app/modules/notifications/services/new-notification.service';
 
 @Component({
     selector: 'app-default',
@@ -9,7 +10,9 @@ export class DefaultComponent implements OnInit {
 
     sideBarOpen = true;
 
-    constructor() { }
+    constructor(private newNotificationService: NewNotificationService) {
+        this.newNotificationService.connect();
+    }
 
     ngOnInit(): void {
     }

@@ -18,4 +18,11 @@ export class NotificationPanelComponent implements OnInit {
     this.notifications$ = this.notificationStore.notifications$;
   }
 
+  onDelete(notification: Notification): void {
+    this.notificationStore.delete(notification);
+  }
+
+  onRead(notification: Notification): void {
+    this.notificationStore.read(notification);
+  }
 }

@@ -5,6 +5,7 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { Notification } from '@app/modules/notifications/interfaces/notification';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NotificationSnackItemComponent } from '@app/modules/notifications/components/notification-snack-item/notification-snack-item.component';
+import { NotificationStore } from '@app/modules/notifications/stores/notification.store';
 
 @Injectable({
   providedIn: 'root'
@@ -15,21 +16,26 @@ export class NewNotificationService {
 
   constructor(
     private authService: AuthService,
-    private snackBar: MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    private notificationStore: NotificationStore
+  ) {
+  }
 
   public connect(): void {
     if (!this.socket$) {
       this.socket$ = this.getNewWebSocket();
       this.authenticate();
       this.socket$.subscribe(
-        (notification: Notification) => this.snackBar.openFromComponent(
-          NotificationSnackItemComponent,
-          {
-            data: notification,
-            duration: 5000,
-          }
-        )
+        (notification: Notification) => {
+          this.notificationStore.refresh();
+          this.snackBar.openFromComponent(
+            NotificationSnackItemComponent,
+            {
+              data: notification,
+              duration: 5000,
+            }
+          );
+        }
       );
     }
   }
