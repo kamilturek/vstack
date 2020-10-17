@@ -2,7 +2,6 @@ from rest_framework import serializers
 
 from instances.api.serializers.image import ImageSerializer
 from instances.models import Instance
-from instances.tasks import run_instance
 
 
 class InstanceSerializer(serializers.ModelSerializer):
