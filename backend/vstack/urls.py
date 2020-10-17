@@ -11,6 +11,7 @@ from users.api.urls import urlpatterns as users_urlpatterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/users/', include(users_urlpatterns)),
+    path('api-auth/', include('rest_framework.urls')),
 ]
 
 urlpatterns += instances_urlpatterns

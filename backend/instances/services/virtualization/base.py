@@ -20,6 +20,14 @@ class VM(ABC):
     def remove(self) -> None:
         ...
 
+    @abstractmethod
+    def stop(self) -> None:
+        ...
+
+    @abstractmethod
+    def start(self) -> None:
+        ...
+
 
 class Virtualization(ABC):
     """

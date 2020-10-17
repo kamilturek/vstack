@@ -48,3 +48,11 @@ class Instance(models.Model, AccessMixin):
     def remove(self) -> None:
         vm = self.virtualization.get_vm(self.container_id)
         vm.remove()
+
+    def stop(self) -> None:
+        vm = self.virtualization.get_vm(self.container_id)
+        vm.stop()
+
+    def start(self) -> None:
+        vm = self.virtualization.get_vm(self.container_id)
+        vm.start()

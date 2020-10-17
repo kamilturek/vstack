@@ -20,6 +20,12 @@ class DockerVM(VM):
     def remove(self) -> None:
         self.container.remove(force=True)
 
+    def stop(self) -> None:
+        self.container.stop()
+
+    def start(self) -> None:
+        self.container.start()
+
 
 class DockerVirtualization(Virtualization):
 
