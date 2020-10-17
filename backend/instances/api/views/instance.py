@@ -30,3 +30,9 @@ class InstanceViewSet(viewsets.ModelViewSet):
         instance = self.get_object()
         instance.start()
         return self.retrieve(request)
+
+    @action(methods=['post'], detail=True)
+    def restart(self, request: Request, pk: int) -> Response:
+        instance = self.get_object()
+        instance.restart()
+        return self.retrieve(request)

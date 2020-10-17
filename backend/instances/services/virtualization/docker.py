@@ -26,6 +26,9 @@ class DockerVM(VM):
     def start(self) -> None:
         self.container.start()
 
+    def restart(self) -> None:
+        self.container.restart()
+
 
 class DockerVirtualization(Virtualization):
 

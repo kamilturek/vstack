@@ -36,6 +36,60 @@ export class InstancesManagementComponent {
     this.instanceStore.refresh();
   }
 
+  start(): void {
+    const selected = this.instanceStore.selection.selected;
+    forkJoin(
+      selected.map(
+        (instance: Instance) => this.instanceService.start(instance)
+      )
+    ).subscribe(
+      () => {
+        this.instanceStore.refresh();
+        this.snackBar.open(
+          selected.length > 1 ?
+            `Started ${selected.length} instances.` :
+            `Started ${selected[0].name}.`
+        );
+      }
+    );
+  }
+
+  restart(): void {
+    const selected = this.instanceStore.selection.selected;
+    forkJoin(
+      selected.map(
+        (instance: Instance) => this.instanceService.restart(instance)
+      )
+    ).subscribe(
+      () => {
+        this.instanceStore.refresh();
+        this.snackBar.open(
+          selected.length > 1 ?
+            `Restarted ${selected.length} instances.` :
+            `Restarted ${selected[0].name}.`
+        );
+      }
+    );
+  }
+
+  stop(): void {
+    const selected = this.instanceStore.selection.selected;
+    forkJoin(
+      selected.map(
+        (instance: Instance) => this.instanceService.stop(instance)
+      )
+    ).subscribe(
+      () => {
+        this.instanceStore.refresh();
+        this.snackBar.open(
+          selected.length > 1 ?
+            `Stopped ${selected.length} instances.` :
+            `Stopped ${selected[0].name}.`
+        );
+      }
+    );
+  }
+
   delete(): void {
     const selected = this.instanceStore.selection.selected;
     forkJoin(
@@ -48,7 +102,7 @@ export class InstancesManagementComponent {
         this.snackBar.open(
           selected.length > 1 ?
             `Deleted ${selected.length} instances.` :
-            `Deleted ${selected[0].name} (${selected[0].container_id}).`
+            `Deleted ${selected[0].name}.`
         );
       }
     );

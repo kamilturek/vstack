@@ -19,6 +19,18 @@ export class InstanceService {
     return this.http.post<Instance>(`${baseUrl}/api/instances/`, newInstance);
   }
 
+  start(instance: Instance): Observable<Instance> {
+    return this.http.post<Instance>(`${baseUrl}/api/instances/${instance.id}/start/`, {});
+  }
+
+  restart(instance: Instance): Observable<Instance> {
+    return this.http.post<Instance>(`${baseUrl}/api/instances/${instance.id}/restart/`, {});
+  }
+
+  stop(instance: Instance): Observable<Instance> {
+    return this.http.post<Instance>(`${baseUrl}/api/instances/${instance.id}/stop/`, {});
+  }
+
   delete(instance: Instance): Observable<{}> {
     return this.http.delete<{}>(`${baseUrl}/api/instances/${instance.id}/`);
   }

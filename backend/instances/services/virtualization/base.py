@@ -28,6 +28,10 @@ class VM(ABC):
     def start(self) -> None:
         ...
 
+    @abstractmethod
+    def restart(self) -> None:
+        ...
+
 
 class Virtualization(ABC):
     """

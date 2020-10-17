@@ -56,3 +56,7 @@ class Instance(models.Model, AccessMixin):
     def start(self) -> None:
         vm = self.virtualization.get_vm(self.container_id)
         vm.start()
+
+    def restart(self) -> None:
+        vm = self.virtualization.get_vm(self.container_id)
+        vm.restart()
