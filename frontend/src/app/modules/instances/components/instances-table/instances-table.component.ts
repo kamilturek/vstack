@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChil
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Instance } from '@app/modules/instances/interfaces/instance';
-import { InstanceStoreService } from '@app/modules/instances/stores/instance-store.service';
+import { InstanceStore } from '@app/modules/instances/stores/instance.store';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class InstancesTableComponent implements OnInit, OnChanges, OnDestroy {
   @Input() filter: string;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public instanceStore: InstanceStoreService) { }
+  constructor(public instanceStore: InstanceStore) { }
 
   ngOnInit(): void {
     this.instanceStore.refresh();

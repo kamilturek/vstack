@@ -6,6 +6,7 @@ import { Notification } from '@app/modules/notifications/interfaces/notification
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NotificationSnackItemComponent } from '@app/modules/notifications/components/notification-snack-item/notification-snack-item.component';
 import { NotificationStore } from '@app/modules/notifications/stores/notification.store';
+import { InstanceStore } from '@app/modules/instances/stores/instance.store';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class NewNotificationService {
   constructor(
     private authService: AuthService,
     private snackBar: MatSnackBar,
-    private notificationStore: NotificationStore
+    private notificationStore: NotificationStore,
+    private instanceStore: InstanceStore
   ) {
   }
 
@@ -28,6 +30,7 @@ export class NewNotificationService {
       this.socket$.subscribe(
         (notification: Notification) => {
           this.notificationStore.refresh();
+          this.instanceStore.refresh();
           this.snackBar.openFromComponent(
             NotificationSnackItemComponent,
             {

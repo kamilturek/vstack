@@ -36,18 +36,17 @@ class Instance(models.Model, AccessMixin):
     @property
     def status(self) -> str:
         if self.container_id is None:
-            return 'Corrupted'
+            return 'Not Available'
         vm = self.virtualization.get_vm(self.container_id)
         return vm.status
 
     def run(self) -> None:
-        vm = self.virtualization.run_vm(self.name, str(self.image))
-        self.container_id = vm.id
-        self.save()
+        from instances.tasks import run_instance
+        run_instance(self.id)
 
     def remove(self) -> None:
-        vm = self.virtualization.get_vm(self.container_id)
-        vm.remove()
+        from instances.tasks import remove_instance
+        remove_instance(self.id)
 
     def stop(self) -> None:
         vm = self.virtualization.get_vm(self.container_id)

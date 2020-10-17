@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { InstancesCreateComponent } from '@app/modules/instances/components/instances-create/instances-create.component';
 import { Instance } from '@app/modules/instances/interfaces/instance';
 import { InstanceService } from '@app/modules/instances/services/instance.service';
-import { InstanceStoreService } from '@app/modules/instances/stores/instance-store.service';
+import { InstanceStore } from '@app/modules/instances/stores/instance.store';
 import { SnackBarService } from '@shared/services/snack-bar.service';
 import { forkJoin } from 'rxjs';
 
@@ -15,7 +15,7 @@ import { forkJoin } from 'rxjs';
 export class InstancesManagementComponent {
 
   constructor(
-    public instanceStore: InstanceStoreService,
+    public instanceStore: InstanceStore,
     private instanceService: InstanceService,
     private snackBar: SnackBarService,
     private dialog: MatDialog

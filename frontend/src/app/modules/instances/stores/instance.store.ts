@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class InstanceStoreService {
+export class InstanceStore {
 
   instances$: Observable<Instance[]>;
   selection = new SelectionModel<Instance>(true, []);

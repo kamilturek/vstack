@@ -10,7 +10,7 @@ class InstanceSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         instance = super().create(validated_data)
         instance.grant_access(self.user)
-        run_instance(instance)
+        instance.run()
         return instance
 
     @property
