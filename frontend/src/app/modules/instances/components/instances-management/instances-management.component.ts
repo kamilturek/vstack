@@ -4,6 +4,7 @@ import { InstancesCreateComponent } from '@app/modules/instances/components/inst
 import { Instance } from '@app/modules/instances/interfaces/instance';
 import { InstanceService } from '@app/modules/instances/services/instance.service';
 import { InstanceStore } from '@app/modules/instances/stores/instance.store';
+import { NotificationStore } from '@app/modules/notifications/stores/notification.store';
 import { SnackBarService } from '@shared/services/snack-bar.service';
 import { forkJoin } from 'rxjs';
 
@@ -17,6 +18,7 @@ export class InstancesManagementComponent {
   constructor(
     public instanceStore: InstanceStore,
     private instanceService: InstanceService,
+    private notificationStore: NotificationStore,
     private snackBar: SnackBarService,
     private dialog: MatDialog
   ) { }
@@ -99,6 +101,7 @@ export class InstancesManagementComponent {
     ).subscribe(
       () => {
         this.instanceStore.refresh();
+        this.notificationStore.refresh(); // Temporary
         this.snackBar.open(
           selected.length > 1 ?
             `Deleted ${selected.length} instances.` :
