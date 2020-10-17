@@ -140,7 +140,7 @@ SHELL_PLUS = 'ipython'
 
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_ENABLED = True
+CELERY_ENABLED = False
 CELERY_TASK_SERIALIZER = 'json'
 
 CHANNEL_LAYERS = {

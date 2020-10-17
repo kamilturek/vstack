@@ -13,9 +13,10 @@ import { RouterModule } from '@angular/router';
 import { DefaultComponent } from './default.component';
 import { DashboardComponent } from '../../modules/dashboard/dashboard.component';
 
+import { AuthModule } from '../../modules/auth/auth.module';
 import { SharedModule } from '../../shared/shared.module';
 import { SettingsModule } from '../../modules/settings/settings.module';
-import { AuthModule } from '../../modules/auth/auth.module';
+import { TerminalModule } from '@app/modules/terminal/terminal.module';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { AuthModule } from '../../modules/auth/auth.module';
         RouterModule,
         SharedModule,
         SettingsModule,
+        TerminalModule,
     ]
 })
 export class DefaultModule { }
