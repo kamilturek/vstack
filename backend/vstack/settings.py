@@ -1,15 +1,15 @@
 import os
 from typing import List
 
-import environ
+from dotenv import load_dotenv
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-env = environ.Env()
-environ.Env.read_env(os.path.join(BASE_DIR, '..', 'vstack.env'))
+load_dotenv(dotenv_path=os.path.join(BASE_DIR, '..', 'vstack.env'), override=True)
 
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
+DOCKER_HOST = os.getenv('DOCKER_HOST')
 
 DEBUG = True
 
@@ -79,8 +79,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'vstack',
-        'USER': env('POSTGRES_USER'),
-        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
         'HOST': 'localhost',
         'PORT': '5432'
     }
