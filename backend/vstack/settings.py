@@ -9,7 +9,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 load_dotenv(dotenv_path=os.path.join(BASE_DIR, '..', 'vstack.env'), override=True)
 
 SECRET_KEY = os.getenv('SECRET_KEY')
-DOCKER_HOST = os.getenv('DOCKER_HOST')
 
 DEBUG = True
 
