@@ -7,6 +7,7 @@ import { InstanceStore } from '@app/modules/instances/stores/instance.store';
 import { NotificationStore } from '@app/modules/notifications/stores/notification.store';
 import { SnackBarService } from '@shared/services/snack-bar.service';
 import { forkJoin } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-instances-management',
@@ -25,7 +26,9 @@ export class InstancesManagementComponent {
 
   add(): void {
     const dialogRef = this.dialog.open(InstancesCreateComponent);
-    dialogRef.afterClosed().subscribe(
+    dialogRef.afterClosed().pipe(
+      filter(Boolean),
+    ).subscribe(
       (result: { refresh?: boolean }) => {
         if (result.refresh) {
           this.refresh();
