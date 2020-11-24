@@ -1,0 +1,18 @@
+<div class="dialog">
+    <h1 mat-dialog-title>Add Terminal</h1>
+    <mat-dialog-content>
+        <mat-selection-list #instancesList>
+            <mat-list-option *ngFor="let instance of instances$ | async" [value]="instance">
+                {{ instance.name }}
+            </mat-list-option>
+        </mat-selection-list>
+        <p *ngIf="(instances$ | async).length === 0">
+            No running instances found.
+        </p>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [disabled]="instancesList.selectedOptions.selected.length === 0"
+            (click)="add()">Add</button>
+    </mat-dialog-actions>
+</div>

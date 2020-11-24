@@ -5,6 +5,7 @@ export interface Instance {
   name: string;
   container_id: string;
   image: Image;
+  status: 'running' | 'exited';
 }
 
 export interface NewInstance {

@@ -1,2 +1,8 @@
-<p>terminals works!</p>
-<app-terminal></app-terminal>
+<app-terminal-management></app-terminal-management>
+<mat-divider></mat-divider>
+<div *ngFor="let terminal of terminalStore.terminals$ | async">
+    {{ terminal.vmId }}
+</div>
+<p>
+    No active terminal sessions.
+</p>

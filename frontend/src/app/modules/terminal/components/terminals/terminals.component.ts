@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TerminalStore } from '@app/modules/terminal/stores/terminal.store';
 
 @Component({
   selector: 'app-terminals',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TerminalsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public terminalStore: TerminalStore
+  ) { }
 
   ngOnInit(): void {
   }
