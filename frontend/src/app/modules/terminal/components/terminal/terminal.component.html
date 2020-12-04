@@ -1,4 +1,13 @@
-<div>
-    <div [id]="vmId">
+<div [id]="vmId" class="mat-elevation-z10 terminal" cdkDrag>
+    <div cdkDragHandle class="handle">
+        <button mat-icon-button>
+            <mat-icon color="accent">clear</mat-icon>
+        </button>
+        <button mat-icon-button>
+            <mat-icon color="accent">open_in_full</mat-icon>
+        </button>
+        <button mat-icon-button>
+            <mat-icon color="accent">minimize</mat-icon>
+        </button>
     </div>
 </div>

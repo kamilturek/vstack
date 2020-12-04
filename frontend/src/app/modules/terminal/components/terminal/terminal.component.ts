@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, Input, ViewEncapsulation } from '@angular/core';
 import { Terminal } from 'xterm';
 import { AttachAddon } from 'xterm-addon-attach';
 
@@ -8,23 +8,20 @@ import { AttachAddon } from 'xterm-addon-attach';
   styleUrls: ['./terminal.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class TerminalComponent implements OnInit, AfterViewInit {
+export class TerminalComponent implements AfterViewInit {
   @Input() vmId: number;
 
   terminal: Terminal;
 
-  constructor() { }
-
-  ngOnInit(): void {
-
+  ngAfterViewInit(): void {
+    this.connect();
   }
 
-  ngAfterViewInit() {
+  private connect(): void {
     this.terminal = new Terminal();
     this.terminal.open(document.getElementById(this.vmId.toString()));
-    // const socket = new WebSocket('ws://94.245.104.69:1111/containers/734ee0637bf9/attach/ws?logs=0&stream=1&stdin=1&stdout=1&stderr=1');
-    // const attachAddon = new AttachAddon(socket);
-    // this.terminal.loadAddon(attachAddon);
-    // this.terminal.element.style.width = '200px'
+    const socket = new WebSocket(`ws://localhost:2375/containers/${this.vmId}/attach/ws?logs=0&stream=1&stdin=1&stdout=1&stderr=1`);
+    const attachAddon = new AttachAddon(socket);
+    this.terminal.loadAddon(attachAddon);
   }
 }

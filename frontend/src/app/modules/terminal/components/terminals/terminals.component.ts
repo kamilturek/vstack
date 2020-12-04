@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Terminal } from '@app/modules/terminal/interfaces/terminal';
 import { TerminalStore } from '@app/modules/terminal/stores/terminal.store';
+import { Observable } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-terminals',
@@ -8,11 +11,15 @@ import { TerminalStore } from '@app/modules/terminal/stores/terminal.store';
 })
 export class TerminalsComponent implements OnInit {
 
+  terminals$: Observable<Terminal[]>;
+
   constructor(
-    public terminalStore: TerminalStore
+    private terminalStore: TerminalStore
   ) { }
 
   ngOnInit(): void {
+    this.terminals$ = this.terminalStore.terminals$.pipe(
+      shareReplay(1),
+    );
   }
-
 }

@@ -49,5 +49,6 @@ class DockerVirtualization(Virtualization):
             command='bash',
             detach=True,
             tty=True,
+            stdin_open=True
         )
         return DockerVM(container)
