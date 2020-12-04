@@ -15,11 +15,11 @@ IMAGES: List[Distribution] = [
     {
         'name': 'ubuntu',
         'image_url': 'https://d1q6f0aelx0por.cloudfront.net/product-logos/library-ubuntu-logo.png',
-        'tags': ['latest', '20.10','20.04', '18.04', '16.04', '14.04'],
+        'tags': ['latest', '20.10', '20.04', '18.04', '16.04', '14.04'],
     },
     {
         'name': 'debian',
-        'image_url': 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Openlogo-debianV2.svg/827px-Openlogo-debianV2.svg.png',
+        'image_url': 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Openlogo-debianV2.svg/827px-Openlogo-debianV2.svg.png',  # noqa
         'tags': ['latest', 'bullseye', 'buster', 'jessie', 'stretch'],
     },
     {
@@ -29,12 +29,12 @@ IMAGES: List[Distribution] = [
     },
     {
         'name': 'archlinux',
-        'image_url': 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Archlinux-icon-crystal-64.svg/1200px-Archlinux-icon-crystal-64.svg.png',
+        'image_url': 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Archlinux-icon-crystal-64.svg/1200px-Archlinux-icon-crystal-64.svg.png',  # noqa
         'tags': ['latest', 'base'],
     },
     {
         'name': 'amazonlinux',
-        'image_url': 'https://raw.githubusercontent.com/docker-library/docs/9ca9202567ccc25ce110f98bbeb6c929844e05d0/amazonlinux/logo.png',
+        'image_url': 'https://raw.githubusercontent.com/docker-library/docs/9ca9202567ccc25ce110f98bbeb6c929844e05d0/amazonlinux/logo.png',  # noqa
         'tags': ['latest', '2', '1'],
     },
     {
@@ -57,4 +57,3 @@ class Command(BaseCommand):
                     tag=tag,
                 )
                 self.stdout.write(f'Created {image["name"]}:{tag} image.')
-        

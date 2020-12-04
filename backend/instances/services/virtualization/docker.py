@@ -1,8 +1,6 @@
 import docker
 from docker.models.containers import Container
 
-from django.conf import settings
-
 from instances.services.virtualization.base import Virtualization, VM
 
 
