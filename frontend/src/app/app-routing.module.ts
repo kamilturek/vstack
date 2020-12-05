@@ -27,10 +27,6 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         children: [
             {
-                path: '',
-                component: DashboardComponent
-            },
-            {
                 path: 'instances',
                 component: InstancesComponent
             },
@@ -45,6 +41,11 @@ const routes: Routes = [
             {
                 path: 'terminals',
                 component: TerminalsComponent,
+            },
+            {
+                path: '',
+                redirectTo: 'instances',
+                pathMatch: 'full',
             },
         ]
     },
