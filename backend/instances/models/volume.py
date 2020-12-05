@@ -1,11 +1,14 @@
 from django.db import models
 
+from instances.managers.volume import VolumeManager
 from instances.services.virtualization import DockerVirtualization
 from utils.mixins import AccessMixin
 
 
 class Volume(models.Model, AccessMixin):
     name = models.TextField(unique=True)
+
+    objects = VolumeManager()
 
     class Meta:
         permissions = (
