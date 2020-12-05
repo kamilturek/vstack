@@ -1,0 +1,10 @@
+<div fxFlex fxLayoutGap="10px">
+    <button mat-button color="accent">
+        <mat-icon>add</mat-icon>
+        <span>Add</span>
+    </button>
+    <button mat-button color="accent" [disabled]="!volumeStore.selection.hasValue()">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+    </button>
+</div>

@@ -5,6 +5,7 @@ import { VolumesTableComponent } from './components/volumes-table/volumes-table.
 import { MaterialModule } from '@app/modules/material/material.module';
 import { VolumesFilterComponent } from './components/volumes-filter/volumes-filter.component';
 import { FormsModule } from '@angular/forms';
+import { VolumesManagementComponent } from './components/volumes-management/volumes-management.component';
 
 
 
@@ -12,7 +13,8 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     VolumesComponent,
     VolumesTableComponent,
-    VolumesFilterComponent
+    VolumesFilterComponent,
+    VolumesManagementComponent
   ],
   imports: [
     CommonModule,
