@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 from celery import shared_task
 
-from instances.models import Instance
+from instances.models import Instance, Volume
 from instances.services.virtualization import DockerVirtualization
 from notifications.models import (
     InstanceFailedNotification,
@@ -46,3 +46,21 @@ def remove_instance(id: int) -> None:
     instance = Instance.objects.get(id=id)
     vm = virtualization.get_vm(instance.container_id)
     vm.remove()
+
+
+@asyncable
+@shared_task
+def create_volume(id: int) -> None:
+    volume = Volume.objects.get(id=id)
+    try:
+        virtualization.create_volume(volume.name)
+    except Exception as e:
+        print(e)
+
+
+@asyncable
+@shared_task
+def remove_volume(id: int) -> None:
+    volume = Volume.objects.get(id=id)
+    vol = virtualization.get_volume(volume.name)
+    vol.remove()

@@ -33,6 +33,16 @@ class VM(ABC):
         ...
 
 
+class Volume(ABC):
+    """
+    Represents actual volume on virtualization level
+    """
+
+    @abstractmethod
+    def remove(self) -> None:
+        ...
+
+
 class Virtualization(ABC):
     """
     Represents virtualization method
