@@ -53,7 +53,9 @@ def remove_instance(id: int) -> None:
 def create_volume(id: int) -> None:
     volume = Volume.objects.get(id=id)
     try:
-        virtualization.create_volume(volume.name)
+        vol = virtualization.create_volume(volume.name)
+        volume.vol_id = vol.id
+        volume.save()
     except Exception as e:
         print(e)
 

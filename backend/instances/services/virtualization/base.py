@@ -38,6 +38,11 @@ class Volume(ABC):
     Represents actual volume on virtualization level
     """
 
+    @property
+    @abstractmethod
+    def id(self) -> str:
+        ...
+
     @abstractmethod
     def remove(self) -> None:
         ...

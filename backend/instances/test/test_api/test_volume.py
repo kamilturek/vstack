@@ -14,7 +14,8 @@ class VolumeListRetrieveAPITestCase(VolumeAPITestCase):
     def setUpTestData(cls):
         super().setUpTestData()
         cls.volume = Volume.objects.create(
-            name='name'
+            name='name',
+            vol_id='vol_id'
         )
 
     def setUp(self):
@@ -26,6 +27,7 @@ class VolumeListRetrieveAPITestCase(VolumeAPITestCase):
         expected_response = {
             'id': self.volume.id,
             'name': self.volume.name,
+            'vol_id': self.volume.vol_id,
         }
         self.assertEqual(200, response.status_code)
         self.assertEqual(expected_response, response.data)
@@ -36,6 +38,7 @@ class VolumeListRetrieveAPITestCase(VolumeAPITestCase):
             {
                 'id': self.volume.id,
                 'name': self.volume.name,
+                'vol_id': self.volume.vol_id,
             }
         ]
         self.assertEqual(200, response.status_code)
@@ -56,6 +59,7 @@ class VolumeCreateAPITestCase(VolumeAPITestCase):
         expected_response = {
             'id': volume.id,
             'name': 'new volume',
+            'vol_id': None,
         }
         mock_create.assert_called_once()
         self.assertEqual(201, response.status_code)

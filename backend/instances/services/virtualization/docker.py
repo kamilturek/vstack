@@ -35,6 +35,10 @@ class DockerVolume(Volume):
     def __init__(self, volume: volumes.Volume) -> None:
         self.volume = volume
 
+    @property
+    def id(self) -> str:
+        return self.volume.short_id
+
     def remove(self) -> None:
         return self.volume.remove()
 

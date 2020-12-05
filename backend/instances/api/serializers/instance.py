@@ -29,7 +29,11 @@ class InstanceSerializer(serializers.ModelSerializer):
 
 class InstanceRetrieveSerializer(serializers.ModelSerializer):
     image = ImageSerializer()
-    volumes = VolumeSerializer(many=True)
+    volumes = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='name'
+    )
 
     class Meta:
         model = Instance

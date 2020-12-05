@@ -62,12 +62,7 @@ class InstanceAPITestCase(AuthAPITestCase):
                 'tag': self.image.tag,
                 'image_url': self.image.image_url,
             },
-            'volumes': [
-                {
-                    'id': volume.id,
-                    'name': volume.name,
-                }
-            ],
+            'volumes': [volume.name],
         }
         self.assertEqual(200, response.status_code)
         self.assertEqual(expected_response, response.data)

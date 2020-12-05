@@ -6,7 +6,12 @@ from utils.mixins import AccessMixin
 
 
 class Volume(models.Model, AccessMixin):
-    name = models.TextField(unique=True)
+    name = models.TextField(
+        unique=True
+    )
+    vol_id = models.TextField(
+        null=True
+    )
 
     objects = VolumeManager()
 
