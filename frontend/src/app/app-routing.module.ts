@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DefaultComponent } from './layouts/default/default.component';
-import { DashboardComponent } from './modules/dashboard/dashboard.component';
+// import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { InstancesComponent } from './modules/instances/components/instances/instances.component';
 import { SettingsComponent } from './modules/settings/components/settings/settings.component';
 import { LoginComponent } from './modules/auth/components/login/login.component';
@@ -10,6 +10,7 @@ import { AuthGuard } from './modules/auth/auth.guard';
 import { RegisterComponent } from './modules/auth/components/register/register.component';
 import { ImagesComponent } from 'src/app/modules/images/components/images/images.component';
 import { TerminalsComponent } from '@app/modules/terminal/components/terminals/terminals.component';
+import { VolumesComponent } from '@app/modules/volume/components/volumes/volumes.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,10 @@ const routes: Routes = [
             {
                 path: 'terminals',
                 component: TerminalsComponent,
+            },
+            {
+                path: 'volumes',
+                component: VolumesComponent,
             },
             {
                 path: '',

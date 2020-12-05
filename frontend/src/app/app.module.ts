@@ -9,6 +9,8 @@ import { ImagesModule } from './modules/images/images.module';
 import { InstancesModule } from './modules/instances/instances.module';
 import { SharedModule } from './shared/shared.module';
 import { TimeagoModule } from 'ngx-timeago';
+import { TerminalModule } from '@app/modules/terminal/terminal.module';
+import { VolumeModule } from '@app/modules/volume/volume.module';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { TimeagoModule } from 'ngx-timeago';
         ImagesModule,
         InstancesModule,
         SharedModule,
+        TerminalModule,
         TimeagoModule.forRoot(),
+        VolumeModule,
     ],
     providers: [],
     bootstrap: [AppComponent]

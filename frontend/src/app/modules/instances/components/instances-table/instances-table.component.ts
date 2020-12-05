@@ -28,7 +28,7 @@ export class InstancesTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.dataSource) {
+    if (changes.filter && this.dataSource) {
       this.dataSource.filter = this.filter;
     }
   }
@@ -51,7 +51,7 @@ export class InstancesTableComponent implements OnInit, OnChanges, OnDestroy {
 
   checkboxLabel(row?: Instance): string {
     if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
     return `${this.instanceStore.selection.isSelected(row) ? 'deselect' : 'select'} instance ${row.id}`;
   }

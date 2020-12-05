@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-instances-filter',
-  templateUrl: './instances-filter.component.html',
-  styleUrls: ['./instances-filter.component.scss']
+  selector: 'app-volumes-filter',
+  templateUrl: './volumes-filter.component.html',
+  styleUrls: ['./volumes-filter.component.scss']
 })
-export class InstancesFilterComponent {
+export class VolumesFilterComponent {
   data: string;
   @Output() filterInput = new EventEmitter<string>();
 
