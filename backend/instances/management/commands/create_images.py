@@ -29,7 +29,7 @@ IMAGES: List[Distribution] = [
     },
     {
         'name': 'fedora',
-        'image_url': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Fedora_logo.svg/1200px-Fedora_logo.svg.png',
+        'image_url': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Fedora_logo.svg/1200px-Fedora_logo.svg.png',  # noqa
         'tags': ['latest', '34', '33', '32', '31'],
     },
     {
