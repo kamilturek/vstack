@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SnackBarService } from '@shared/services/snack-bar.service';
 import { InstanceModel } from '@app/modules/instances/model/instance.model';
 import { InstanceService } from '@app/modules/instances/services/instance.service';
-import { Instance } from '@app/modules/instances/interfaces/instance';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-instances-create',
@@ -20,7 +18,8 @@ export class InstancesCreateComponent implements OnInit {
     private dialogRef: MatDialogRef<InstancesCreateComponent>,
     private fb: FormBuilder,
     private snackBar: SnackBarService,
-    private instanceService: InstanceService
+    private instanceService: InstanceService,
+    @Inject(MAT_DIALOG_DATA) private data?: { image: number },
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +31,10 @@ export class InstancesCreateComponent implements OnInit {
       memoryLimitUnit: this.fb.control('g', Validators.required),
       user: this.fb.control(''),
     });
+
+    if (this.data) {
+      this.instanceForm.patchValue(this.data);
+    }
   }
 
   add(): void {
