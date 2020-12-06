@@ -1,3 +1,5 @@
+from typing import Iterable
+
 import docker
 from docker.models import containers, volumes
 
@@ -58,7 +60,7 @@ class DockerVirtualization(Virtualization):
         return DockerVolume(volume)
 
     @classmethod
-    def run_vm(cls, name: str, image: str) -> DockerVM:
+    def run_vm(cls, name: str, image: str, volumes: Iterable[str]) -> DockerVM:
         client = docker.from_env()
         container = client.containers.run(
             name=name,
@@ -66,7 +68,13 @@ class DockerVirtualization(Virtualization):
             command='bash',
             detach=True,
             tty=True,
-            stdin_open=True
+            stdin_open=True,
+            volumes={
+                volume: {
+                    'bind': f'/mnt/{volume}',
+                    'mode': 'rw',
+                } for volume in volumes
+            }
         )
         return DockerVM(container)
 

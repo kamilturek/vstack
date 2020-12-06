@@ -6,9 +6,11 @@ export interface Instance {
   container_id: string;
   image: Image;
   status: 'running' | 'exited';
+  volumes: string[];
 }
 
 export interface NewInstance {
   name: string;
   image: number;
+  volumes: number[];
 }

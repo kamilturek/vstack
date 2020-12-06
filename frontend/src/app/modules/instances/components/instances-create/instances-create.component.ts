@@ -43,8 +43,8 @@ export class InstancesCreateComponent implements OnInit {
     if (this.instanceForm.invalid) {
       this.snackBar.open('Please fill in all required fields.');
     } else {
-      const { name, image } = this.instanceForm.value;
-      const newInstance = new InstanceModel(name, image);
+      const { name, image, volumes } = this.instanceForm.value;
+      const newInstance = new InstanceModel(name, image, volumes);
       this.instanceService.create(newInstance.data).subscribe(
         () => this.dialogRef.close({ refresh: true }),
         () => this.snackBar.open('Something went wrong')

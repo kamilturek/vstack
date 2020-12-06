@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import List
 
 
 class VM(ABC):
@@ -57,4 +58,19 @@ class Virtualization(ABC):
     @classmethod
     @abstractmethod
     def get_vm(self, id: str) -> VM:
+        ...
+
+    @classmethod
+    @abstractmethod
+    def get_volume(cls, name: str) -> Volume:
+        ...
+
+    @classmethod
+    @abstractmethod
+    def run_vm(cls, name: str, image: str, volumes: List[str]) -> VM:
+        ...
+
+    @classmethod
+    @abstractmethod
+    def create_volume(cls, name: str) -> Volume:
         ...

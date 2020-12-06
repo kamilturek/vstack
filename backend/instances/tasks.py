@@ -27,7 +27,11 @@ def run_instance(id: int) -> None:
         instance
     )
     try:
-        vm = virtualization.run_vm(instance.name, str(instance.image))
+        vm = virtualization.run_vm(
+            instance.name,
+            str(instance.image),
+            instance.volumes.values_list('name', flat=True)
+        )
         instance.container_id = vm.id
         instance.save()
     except Exception as e:

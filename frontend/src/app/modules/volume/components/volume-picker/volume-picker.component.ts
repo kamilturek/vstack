@@ -26,7 +26,9 @@ export class VolumePickerComponent implements ControlValueAccessor {
   writeValue(volumes: Volume[]): void {
     if (this.volumes.options) {
       const volumesOptions = this.volumes.options.filter(
-        (item: MatListOption) => volumes.map((volume: Volume) => volume.id).includes(item.value)
+        (item: MatListOption) => volumes.map(
+          (volume: Volume) => volume.id
+        ).includes(item.value.id)
       );
       this.volumes.selectedOptions.select(...volumesOptions);
     }
