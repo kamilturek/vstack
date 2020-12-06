@@ -30,6 +30,9 @@ class VolumeSignalsTestCase(TestCase):
 
     @mock.patch.object(Volume, 'remove')
     def test_remove_on_delete(self, mock_remove):
-        volume = Volume.objects.create(name='name')
+        volume = Volume.objects.create(
+            name='name',
+            vol_id='id'
+        )
         volume.delete()
         mock_remove.assert_called_once()
