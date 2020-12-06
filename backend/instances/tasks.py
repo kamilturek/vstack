@@ -7,7 +7,10 @@ from instances.services.virtualization import DockerVirtualization
 from notifications.models import (
     InstanceFailedNotification,
     InstanceFinishedNotification,
-    InstanceScheduledNotification
+    InstanceScheduledNotification,
+    VolumeFailedNotification,
+    VolumeFinishedNotification,
+    VolumeScheduledNotification,
 )
 from utils.decorators import asyncable
 
@@ -52,12 +55,25 @@ def remove_instance(id: int) -> None:
 @shared_task
 def create_volume(id: int) -> None:
     volume = Volume.objects.get(id=id)
+    VolumeScheduledNotification.send(
+        volume.accessors[0],
+        volume
+    )
     try:
         vol = virtualization.create_volume(volume.name)
         volume.vol_id = vol.id
         volume.save()
     except Exception as e:
+        VolumeFailedNotification.send(
+            volume.accessors[0],
+            volume
+        )
         print(e)
+    else:
+        VolumeFinishedNotification.send(
+            volume.accessors[0],
+            volume
+        )
 
 
 @asyncable

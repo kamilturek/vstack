@@ -4,3 +4,8 @@ from .instance import (
     InstanceFinishedNotification,
     InstanceScheduledNotification
 )
+from .volume import (
+    VolumeFailedNotification,
+    VolumeFinishedNotification,
+    VolumeScheduledNotification,
+)
