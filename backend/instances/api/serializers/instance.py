@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
 from instances.api.serializers.image import ImageSerializer
-from instances.api.serializers.volume import VolumeSerializer
 from instances.models import Instance, Volume
 
 
