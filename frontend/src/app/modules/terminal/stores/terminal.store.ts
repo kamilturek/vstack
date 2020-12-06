@@ -7,6 +7,7 @@ import { Terminal } from '@app/modules/terminal/interfaces/terminal';
 })
 export class TerminalStore {
 
+  zIndex = 0;
   terminals$: Observable<Terminal[]>;
   private terminals: BehaviorSubject<Terminal[]>;
 

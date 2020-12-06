@@ -11,6 +11,7 @@ import { AttachAddon } from 'xterm-addon-attach';
 })
 export class TerminalComponent implements AfterViewInit {
   @Input() vmId: string;
+  zIndex = 0;
 
   terminal: Terminal;
 
@@ -24,6 +25,11 @@ export class TerminalComponent implements AfterViewInit {
 
   close(): void {
     this.terminalStore.remove(this.vmId);
+  }
+
+  bringToFront(): void {
+    this.zIndex = this.terminalStore.zIndex + 1;
+    this.terminalStore.zIndex = this.zIndex;
   }
 
   private connect(): void {
