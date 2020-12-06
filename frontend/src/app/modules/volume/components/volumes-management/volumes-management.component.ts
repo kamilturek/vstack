@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NotificationStore } from '@app/modules/notifications/stores/notification.store';
@@ -59,6 +60,11 @@ export class VolumesManagementComponent implements OnInit {
           `Deleted ${selected.length} volumes.` :
           `Deleted ${selected[0].name}.`
         );
+      },
+      (error: HttpErrorResponse) => {
+        if (error.status === 403) {
+          this.snackBar.open('Cannot delete. Volume is still in use.');
+        }
       }
     );
   }

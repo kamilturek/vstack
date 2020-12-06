@@ -1,6 +1,6 @@
 from unittest import mock
 
-from instances.models import Volume
+from instances.models import Image, Instance, Volume
 from utils.api import AuthAPITestCase
 
 
@@ -14,7 +14,7 @@ class VolumeListRetrieveAPITestCase(VolumeAPITestCase):
     def setUpTestData(cls):
         super().setUpTestData()
         cls.volume = Volume.objects.create(
-            name='name',
+            name='volume',
             vol_id='vol_id'
         )
 
@@ -76,3 +76,25 @@ class VolumeCreateAPITestCase(VolumeAPITestCase):
         mock_create.assert_not_called()
         self.assertEqual(400, response.status_code)
         self.assertEqual('unique', response.data['name'][0].code)
+
+
+class VolumeDestroyAPITestCase(VolumeAPITestCase):
+
+    @mock.patch.object(Volume, 'remove')
+    def test_delete_not_allowed(self, mock_remove):
+        volume = Volume.objects.create(
+            name='volume',
+            vol_id='id'
+        )
+        image = Image.objects.create(
+            name='image'
+        )
+        instance = Instance.objects.create(
+            name='instance',
+            image=image
+        )
+        volume.grant_access(self.user)
+        instance.grant_access(self.user)
+        instance.volumes.add(volume)
+        response = self.client.delete(f'{self.URL}{volume.id}/')
+        self.assertEqual(403, response.status_code)
