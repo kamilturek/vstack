@@ -26,6 +26,7 @@ export class InstancesCreateComponent implements OnInit {
     this.instanceForm = this.fb.group({
       name: this.fb.control('', Validators.required),
       image: this.fb.control(null, Validators.required),
+      volumes: this.fb.control([]),
       cpuShares: this.fb.control(100, Validators.required),
       memoryLimitValue: this.fb.control(1, Validators.required),
       memoryLimitUnit: this.fb.control('g', Validators.required),

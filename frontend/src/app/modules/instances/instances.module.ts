@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InstancesManagementComponent } from './components/instances-management/instances-management.component';
 import { InstancesCreateComponent } from './components/instances-create/instances-create.component';
 import { ImagesModule } from '@app/modules/images/images.module';
+import { VolumeModule } from '@app/modules/volume/volume.module';
 
 
 
@@ -26,6 +27,7 @@ import { ImagesModule } from '@app/modules/images/images.module';
     ImagesModule,
     MaterialModule,
     ReactiveFormsModule,
+    VolumeModule,
   ]
 })
 export class InstancesModule { }

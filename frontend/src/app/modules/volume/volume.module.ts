@@ -7,6 +7,7 @@ import { VolumesFilterComponent } from './components/volumes-filter/volumes-filt
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VolumesManagementComponent } from './components/volumes-management/volumes-management.component';
 import { VolumeCreateComponent } from './components/volume-create/volume-create.component';
+import { VolumePickerComponent } from './components/volume-picker/volume-picker.component';
 
 
 
@@ -16,13 +17,17 @@ import { VolumeCreateComponent } from './components/volume-create/volume-create.
     VolumesTableComponent,
     VolumesFilterComponent,
     VolumesManagementComponent,
-    VolumeCreateComponent
+    VolumeCreateComponent,
+    VolumePickerComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     MaterialModule,
     ReactiveFormsModule,
+  ],
+  exports: [
+    VolumePickerComponent,
   ]
 })
 export class VolumeModule { }
