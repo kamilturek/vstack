@@ -7,6 +7,7 @@ import { TerminalManagementComponent } from './components/terminal-management/te
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../material/material.module';
 import { TerminalCreateComponent } from './components/terminal-create/terminal-create.component';
+import { TerminalActivePipe } from './pipes/terminal-active.pipe';
 
 
 
@@ -15,7 +16,8 @@ import { TerminalCreateComponent } from './components/terminal-create/terminal-c
     TerminalsComponent,
     TerminalComponent,
     TerminalManagementComponent,
-    TerminalCreateComponent
+    TerminalCreateComponent,
+    TerminalActivePipe
   ],
   imports: [
     CommonModule,

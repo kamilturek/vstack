@@ -2,7 +2,7 @@
     <h1 mat-dialog-title>Add Terminal</h1>
     <mat-dialog-content>
         <mat-selection-list #instancesList>
-            <mat-list-option *ngFor="let instance of instances$ | async" [value]="instance">
+            <mat-list-option *ngFor="let instance of instances$ | async" [value]="instance" [disabled]="instance.container_id | terminalActive | async">
                 {{ instance.name }}
             </mat-list-option>
         </mat-selection-list>

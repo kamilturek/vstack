@@ -1,6 +1,6 @@
 <div [id]="vmId" class="mat-elevation-z10 terminal" cdkDrag>
     <div cdkDragHandle class="handle">
-        <button mat-icon-button>
+        <button mat-icon-button (click)="close()">
             <mat-icon color="accent">clear</mat-icon>
         </button>
         <button mat-icon-button>
