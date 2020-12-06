@@ -4,8 +4,9 @@ import { VolumesComponent } from './components/volumes/volumes.component';
 import { VolumesTableComponent } from './components/volumes-table/volumes-table.component';
 import { MaterialModule } from '@app/modules/material/material.module';
 import { VolumesFilterComponent } from './components/volumes-filter/volumes-filter.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VolumesManagementComponent } from './components/volumes-management/volumes-management.component';
+import { VolumeCreateComponent } from './components/volume-create/volume-create.component';
 
 
 
@@ -14,12 +15,14 @@ import { VolumesManagementComponent } from './components/volumes-management/volu
     VolumesComponent,
     VolumesTableComponent,
     VolumesFilterComponent,
-    VolumesManagementComponent
+    VolumesManagementComponent,
+    VolumeCreateComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     MaterialModule,
+    ReactiveFormsModule,
   ]
 })
 export class VolumeModule { }

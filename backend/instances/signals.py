@@ -12,4 +12,5 @@ def remove_instance(sender, instance, **kwargs):
 
 @receiver(pre_delete, sender=Volume)
 def remove_volume(sender, instance, **kwargs):
-    instance.remove()
+    if instance.vol_id:
+        instance.remove()

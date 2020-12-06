@@ -15,4 +15,12 @@ export class VolumeService {
   getVolumes(): Observable<Volume[]> {
     return this.http.get<Volume[]>(`${baseUrl}/api/volumes/`);
   }
+
+  create(volume: { name: string }): Observable<Volume> {
+    return this.http.post<Volume>(`${baseUrl}/api/volumes/`, volume);
+  }
+
+  delete(volume: Volume): Observable<{}> {
+    return this.http.delete<{}>(`${baseUrl}/api/volumes/${volume.id}/`);
+  }
 }
