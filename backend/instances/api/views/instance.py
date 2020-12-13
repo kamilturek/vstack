@@ -6,6 +6,7 @@ from rest_framework.request import Request
 from rest_framework.permissions import IsAuthenticated
 
 from instances.api.exporters import InstanceExporter
+from instances.api.filters import InstanceFilter
 from instances.api.serializers import InstanceSerializer, InstanceRetrieveSerializer, InstanceExportSerializer
 from instances.models import Instance
 from utils.api.mixins import ExportMixin
@@ -13,7 +14,7 @@ from utils.api.mixins import ExportMixin
 
 class InstanceViewSet(viewsets.ModelViewSet, ExportMixin):
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['id']
+    filterset_class = InstanceFilter
     permission_classes = [IsAuthenticated]
     exporter_class = InstanceExporter
 

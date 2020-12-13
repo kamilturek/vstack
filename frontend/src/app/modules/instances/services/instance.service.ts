@@ -36,11 +36,9 @@ export class InstanceService {
   }
 
   export(instances: Instance[]): Observable<any> {
-    const params = new HttpParams().append(
-      'id', instances.map((instance: Instance) => instance.id).join(',')
-    );
+    const params = new HttpParams().append('id__in', instances.map((instance: Instance) => instance.id).join(','));
 
-    return this.http.get(`${baseUrl}/api/instances/export`, {
+    return this.http.get(`${baseUrl}/api/instances/export/`, {
       responseType: 'blob',
       params
     });
