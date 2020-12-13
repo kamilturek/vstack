@@ -37,3 +37,15 @@ class InstanceRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Instance
         fields = ['id', 'name', 'container_id', 'status', 'image', 'volumes']
+
+
+class InstanceExportSerializer(serializers.ModelSerializer):
+    image = serializers.CharField(source='image.name')
+    volumes = serializers.SerializerMethodField()
+
+    def get_volumes(self, obj: Instance) -> str:
+        return ', '.join(obj.volumes.values_list('name', flat=True))
+
+    class Meta:
+        model = Instance
+        fields = ['name', 'container_id', 'image', 'volumes']
