@@ -14,7 +14,6 @@ from notifications.models import (
 )
 from utils.decorators import asyncable
 
-
 virtualization = DockerVirtualization
 
 

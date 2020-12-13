@@ -7,7 +7,6 @@ from typing import Dict, Iterable, NoReturn, Optional, Union
 
 from utils import Database, Storage
 
-
 CONTAINER = 'vstack_db_1'
 POSTGRES_USER = os.environ.get('POSTGRES_USER')
 POSTGRES_DB = os.environ.get('POSTGRES_DB')

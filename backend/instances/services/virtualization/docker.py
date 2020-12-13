@@ -3,7 +3,7 @@ from typing import Iterable
 import docker
 from docker.models import containers, volumes
 
-from instances.services.virtualization.base import Virtualization, VM, Volume
+from instances.services.virtualization.base import VM, Virtualization, Volume
 
 
 class DockerVM(VM):

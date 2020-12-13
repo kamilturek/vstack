@@ -9,7 +9,6 @@ from django.db import models, transaction
 from notifications.api.serializers import NotificationSerializer
 from users.models import User
 
-
 NotificationType = Literal['SUCCESS', 'INFO', 'WARNING', 'ERROR']
 
 

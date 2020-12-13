@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 import argparse
-import os
 import datetime
+import os
 from typing import NoReturn, Optional
 
 from utils import Database, Storage
-
 
 CONTAINER = 'vstack_db_1'
 POSTGRES_USER = os.environ.get('POSTGRES_USER')
