@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { baseUrl } from '@environment/environment';
 import { Instance, NewInstance } from '@app/modules/instances/interfaces/instance';
 import { Observable } from 'rxjs';
@@ -33,5 +33,16 @@ export class InstanceService {
 
   delete(instance: Instance): Observable<{}> {
     return this.http.delete<{}>(`${baseUrl}/api/instances/${instance.id}/`);
+  }
+
+  export(instances: Instance[]): Observable<any> {
+    const params = new HttpParams().append(
+      'id', instances.map((instance: Instance) => instance.id).join(',')
+    );
+
+    return this.http.get(`${baseUrl}/api/instances/export`, {
+      responseType: 'blob',
+      params: params
+    });
   }
 }
