@@ -21,7 +21,9 @@ export class VolumePickerComponent implements ControlValueAccessor {
 
   constructor(
     public volumeStore: VolumeStore
-  ) { }
+  ) {
+    this.volumeStore.refresh();
+  }
 
   writeValue(volumes: Volume[]): void {
     if (this.volumes.options) {
