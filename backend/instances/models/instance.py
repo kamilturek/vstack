@@ -2,6 +2,7 @@ from django.db import models
 
 from instances.managers.instance import InstanceManager
 from instances.models.image import Image
+from instances.models.volume import Volume
 from instances.services.virtualization import DockerVirtualization
 from utils.mixins import AccessMixin
 
@@ -15,6 +16,10 @@ class Instance(models.Model, AccessMixin):
     )
     container_id = models.TextField(
         null=True
+    )
+    volumes = models.ManyToManyField(
+        Volume,
+        related_name='instances',
     )
 
     objects = InstanceManager()

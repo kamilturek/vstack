@@ -1,10 +1,14 @@
 from rest_framework import serializers
 
 from instances.api.serializers.image import ImageSerializer
-from instances.models import Instance
+from instances.models import Instance, Volume
 
 
 class InstanceSerializer(serializers.ModelSerializer):
+    volumes = serializers.PrimaryKeyRelatedField(
+        many=True,
+        queryset=Volume.objects.all()
+    )
 
     def create(self, validated_data):
         instance = super().create(validated_data)
@@ -18,13 +22,18 @@ class InstanceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Instance
-        fields = ['id', 'name', 'container_id', 'image']
+        fields = ['id', 'name', 'container_id', 'image', 'volumes']
         read_only_fields = ['container_id']
 
 
 class InstanceRetrieveSerializer(serializers.ModelSerializer):
     image = ImageSerializer()
+    volumes = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='name'
+    )
 
     class Meta:
         model = Instance
-        fields = ['id', 'name', 'container_id', 'status', 'image']
+        fields = ['id', 'name', 'container_id', 'status', 'image', 'volumes']

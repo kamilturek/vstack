@@ -2,12 +2,15 @@ from __future__ import absolute_import
 
 from celery import shared_task
 
-from instances.models import Instance
+from instances.models import Instance, Volume
 from instances.services.virtualization import DockerVirtualization
 from notifications.models import (
     InstanceFailedNotification,
     InstanceFinishedNotification,
-    InstanceScheduledNotification
+    InstanceScheduledNotification,
+    VolumeFailedNotification,
+    VolumeFinishedNotification,
+    VolumeScheduledNotification,
 )
 from utils.decorators import asyncable
 
@@ -24,7 +27,11 @@ def run_instance(id: int) -> None:
         instance
     )
     try:
-        vm = virtualization.run_vm(instance.name, str(instance.image))
+        vm = virtualization.run_vm(
+            instance.name,
+            str(instance.image),
+            instance.volumes.values_list('name', flat=True)
+        )
         instance.container_id = vm.id
         instance.save()
     except Exception as e:
@@ -46,3 +53,36 @@ def remove_instance(id: int) -> None:
     instance = Instance.objects.get(id=id)
     vm = virtualization.get_vm(instance.container_id)
     vm.remove()
+
+
+@asyncable
+@shared_task
+def create_volume(id: int) -> None:
+    volume = Volume.objects.get(id=id)
+    VolumeScheduledNotification.send(
+        volume.accessors[0],
+        volume
+    )
+    try:
+        vol = virtualization.create_volume(volume.name)
+        volume.vol_id = vol.id
+        volume.save()
+    except Exception as e:
+        VolumeFailedNotification.send(
+            volume.accessors[0],
+            volume
+        )
+        print(e)
+    else:
+        VolumeFinishedNotification.send(
+            volume.accessors[0],
+            volume
+        )
+
+
+@asyncable
+@shared_task
+def remove_volume(id: int) -> None:
+    volume = Volume.objects.get(id=id)
+    vol = virtualization.get_volume(volume.name)
+    vol.remove()

@@ -1,4 +1,7 @@
-<mat-card fxFlex="nogrow" fxLayout="column" fxLayoutAlign="center center">
+<mat-card fxFlex="nogrow"
+          fxLayout="column"
+          fxLayoutAlign="center center"
+          [matMenuTriggerFor]="menu">
     <div>
         <p>{{ image.name }}</p>
         <small>{{ image.tag }}</small>
@@ -7,3 +10,8 @@
         <img [src]="image.image_url">
     </div>
 </mat-card>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="create()">
+        Create instance
+    </button>
+</mat-menu>

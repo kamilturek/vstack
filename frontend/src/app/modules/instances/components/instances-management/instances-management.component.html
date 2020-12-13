@@ -7,7 +7,7 @@
         <mat-icon>refresh</mat-icon>
         <span>Refresh</span>
     </button>
-    <button mat-button color="accent" [disabled]="!instanceStore.selection.hasValue()">
+    <button mat-button color="accent" [disabled]="!instanceStore.selection.hasValue()" (click)="export()">
         <mat-icon>get_app</mat-icon>
         <span>Export to CSV</span>
     </button>

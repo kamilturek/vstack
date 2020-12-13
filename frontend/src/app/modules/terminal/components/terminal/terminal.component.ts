@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, Input, ViewEncapsulation } from '@angular/core';
+import { TerminalStore } from '@app/modules/terminal/stores/terminal.store';
 import { Terminal } from 'xterm';
 import { AttachAddon } from 'xterm-addon-attach';
 
@@ -9,12 +10,26 @@ import { AttachAddon } from 'xterm-addon-attach';
   encapsulation: ViewEncapsulation.None,
 })
 export class TerminalComponent implements AfterViewInit {
-  @Input() vmId: number;
+  @Input() vmId: string;
+  zIndex = 0;
 
   terminal: Terminal;
 
+  constructor(
+    private terminalStore: TerminalStore,
+  ) { }
+
   ngAfterViewInit(): void {
     this.connect();
+  }
+
+  close(): void {
+    this.terminalStore.remove(this.vmId);
+  }
+
+  bringToFront(): void {
+    this.zIndex = this.terminalStore.zIndex + 1;
+    this.terminalStore.zIndex = this.zIndex;
   }
 
   private connect(): void {

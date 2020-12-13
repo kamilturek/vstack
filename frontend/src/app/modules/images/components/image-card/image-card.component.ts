@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Image } from '@app/modules/images/interfaces/image';
+import { InstancesCreateComponent } from '@app/modules/instances/components/instances-create/instances-create.component';
 
 @Component({
     selector: 'app-image-card',
@@ -8,4 +10,17 @@ import { Image } from '@app/modules/images/interfaces/image';
 })
 export class ImageCardComponent {
     @Input() image: Image;
+
+    constructor(
+        private dialog: MatDialog
+    ) { }
+
+    create(): void {
+        const dialogRef = this.dialog.open(
+            InstancesCreateComponent,
+            {
+                data: { image: this.image }
+            }
+        );
+    }
 }

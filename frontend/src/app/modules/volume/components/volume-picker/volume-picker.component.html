@@ -1,0 +1,5 @@
+<mat-selection-list #volumes>
+    <mat-list-option *ngFor="let volume of volumeStore.volumes$ | async" [value]="volume">
+        {{ volume.name }}
+    </mat-list-option>
+</mat-selection-list>

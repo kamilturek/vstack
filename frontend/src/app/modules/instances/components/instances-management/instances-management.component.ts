@@ -8,6 +8,7 @@ import { NotificationStore } from '@app/modules/notifications/stores/notificatio
 import { SnackBarService } from '@shared/services/snack-bar.service';
 import { forkJoin } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import saveAs from 'file-saver';
 
 @Component({
   selector: 'app-instances-management',
@@ -111,6 +112,14 @@ export class InstancesManagementComponent {
             `Deleted ${selected[0].name}.`
         );
       }
+    );
+  }
+
+  export(): void {
+    this.instanceService.export(
+      this.instanceStore.selection.selected
+    ).subscribe(
+      (data: any) => saveAs(data, 'instances.csv')
     );
   }
 }

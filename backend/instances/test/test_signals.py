@@ -2,7 +2,7 @@ from unittest import mock
 
 from django.test import TestCase
 
-from instances.models import Image, Instance
+from instances.models import Image, Instance, Volume
 
 
 class InstanceSignalsTestCase(TestCase):
@@ -23,4 +23,16 @@ class InstanceSignalsTestCase(TestCase):
             container_id='id'
         )
         instance.delete()
+        mock_remove.assert_called_once()
+
+
+class VolumeSignalsTestCase(TestCase):
+
+    @mock.patch.object(Volume, 'remove')
+    def test_remove_on_delete(self, mock_remove):
+        volume = Volume.objects.create(
+            name='name',
+            vol_id='id'
+        )
+        volume.delete()
         mock_remove.assert_called_once()

@@ -28,6 +28,16 @@ IMAGES: List[Distribution] = [
         'tags': ['latest', '3.12', '3.11', '3.10', '3.9'],
     },
     {
+        'name': 'fedora',
+        'image_url': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Fedora_logo.svg/1200px-Fedora_logo.svg.png',  # noqa
+        'tags': ['latest', '34', '33', '32', '31'],
+    },
+    {
+        'name': 'centos',
+        'image_url': 'https://seeklogo.com/images/C/centos-logo-494F57D973-seeklogo.com.png',
+        'tags': ['latest', '8', '7', '6']
+    },
+    {
         'name': 'archlinux',
         'image_url': 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Archlinux-icon-crystal-64.svg/1200px-Archlinux-icon-crystal-64.svg.png',  # noqa
         'tags': ['latest', 'base'],

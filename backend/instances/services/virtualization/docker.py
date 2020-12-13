@@ -1,12 +1,14 @@
-import docker
-from docker.models.containers import Container
+from typing import Iterable
 
-from instances.services.virtualization.base import Virtualization, VM
+import docker
+from docker.models import containers, volumes
+
+from instances.services.virtualization.base import Virtualization, VM, Volume
 
 
 class DockerVM(VM):
 
-    def __init__(self, container: Container) -> None:
+    def __init__(self, container: containers.Container) -> None:
         self.container = container
 
     @property
@@ -30,16 +32,35 @@ class DockerVM(VM):
         self.container.restart()
 
 
+class DockerVolume(Volume):
+
+    def __init__(self, volume: volumes.Volume) -> None:
+        self.volume = volume
+
+    @property
+    def id(self) -> str:
+        return self.volume.short_id
+
+    def remove(self) -> None:
+        return self.volume.remove()
+
+
 class DockerVirtualization(Virtualization):
 
     @classmethod
-    def get_vm(self, id: str) -> DockerVM:
+    def get_vm(cls, id: str) -> DockerVM:
         client = docker.from_env()
         container = client.containers.get(id)
         return DockerVM(container)
 
     @classmethod
-    def run_vm(self, name: str, image: str) -> DockerVM:
+    def get_volume(cls, name: str) -> DockerVolume:
+        client = docker.from_env()
+        volume = client.volumes.get(name)
+        return DockerVolume(volume)
+
+    @classmethod
+    def run_vm(cls, name: str, image: str, volumes: Iterable[str]) -> DockerVM:
         client = docker.from_env()
         container = client.containers.run(
             name=name,
@@ -47,6 +68,20 @@ class DockerVirtualization(Virtualization):
             command='bash',
             detach=True,
             tty=True,
-            stdin_open=True
+            stdin_open=True,
+            volumes={
+                volume: {
+                    'bind': f'/mnt/{volume}',
+                    'mode': 'rw',
+                } for volume in volumes
+            }
         )
         return DockerVM(container)
+
+    @classmethod
+    def create_volume(cls, name: str) -> DockerVolume:
+        client = docker.from_env()
+        volume = client.volumes.create(
+            name=name
+        )
+        return DockerVolume(volume)

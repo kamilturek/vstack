@@ -8,7 +8,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class InstanceStore {
-
   instances$: Observable<Instance[]>;
   selection = new SelectionModel<Instance>(true, []);
   private instances: BehaviorSubject<Instance[]>;
