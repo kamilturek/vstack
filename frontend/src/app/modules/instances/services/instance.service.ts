@@ -42,7 +42,7 @@ export class InstanceService {
 
     return this.http.get(`${baseUrl}/api/instances/export`, {
       responseType: 'blob',
-      params: params
+      params
     });
   }
 }
